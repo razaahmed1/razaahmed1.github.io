@@ -3260,35 +3260,15 @@ body {
    VIP INTRO LOGO (REFINED)
 ========================================================================= */
 .intro-vip-logo {
-    width: 60px;
-    height: 60px;
-    margin: 0 auto 1.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 2rem;
-    color: #eef2ff;
-    background: rgba(15, 17, 26, 0.6);
-    border: 1px solid rgba(167, 139, 250, 0.4);
-    border-radius: 16px;
-    box-shadow: 
-        inset 0 0 20px rgba(167, 139, 250, 0.2),
-        0 0 30px rgba(99, 102, 241, 0.4);
-    backdrop-filter: blur(10px);
-    position: relative;
+    margin: 0 auto 1rem;
+    display: inline-flex;
+    font-size: 2.5rem;
+    background: linear-gradient(135deg, #a78bfa, #38bdf8);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 0 15px rgba(167, 139, 250, 0.5));
     animation: logoFloat 4s ease-in-out infinite;
-}
-
-.intro-vip-logo::before {
-    content: '';
-    position: absolute;
-    inset: -2px;
-    border-radius: inherit;
-    background: linear-gradient(135deg, rgba(99, 102, 241, 0.8), rgba(56, 189, 248, 0.8));
-    z-index: -1;
-    filter: blur(8px);
-    opacity: 0.6;
-    animation: logoGlowPulse 4s ease-in-out infinite;
 }
 
 @keyframes logoFloat {
@@ -3296,16 +3276,11 @@ body {
     50% { transform: translateY(-8px); }
 }
 
-@keyframes logoGlowPulse {
-    0%, 100% { opacity: 0.4; }
-    50% { opacity: 0.8; }
-}
-
 .intro-title {
     font-family: "Space Grotesk", sans-serif !important;
     text-transform: uppercase !important;
     letter-spacing: -0.02em !important;
-    font-size: clamp(2.5rem, 5vw, 4rem) !important;
+    font-size: clamp(1.8rem, 3.5vw, 2.8rem) !important;
     font-weight: 900 !important;
     color: #ffffff !important;
     margin-bottom: 0.5rem !important;
