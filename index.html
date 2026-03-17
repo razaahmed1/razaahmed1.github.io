@@ -16,16 +16,28 @@
     <!-- ===== WELCOME INTRO SCREEN ===== -->
     <section id="intro" class="intro-screen" aria-label="Welcome screen">
         <div class="intro-bg" aria-hidden="true"></div>
-        <div class="intro-content">
-            <div class="intro-title">Welcome to Ahmed Raza's Portfolio</div>
-            <div class="intro-subtitle">
-                <span id="intro-typing" class="typing"></span>
+        <div class="intro-floating-stack">
+            <div class="cube-wrapper">
+                <div class="cube">
+                    <div class="cube-face front"><i class="fab fa-laravel"></i></div>
+                    <div class="cube-face back"><i class="fab fa-php"></i></div>
+                    <div class="cube-face right"><i class="fab fa-js"></i></div>
+                    <div class="cube-face left"><i class="fab fa-python"></i></div>
+                    <div class="cube-face top"><i class="fas fa-database"></i></div>
+                    <div class="cube-face bottom"><i class="fab fa-html5"></i></div>
+                </div>
             </div>
-            <button id="enter-btn" class="btn-enter" type="button">
-                Enter Portfolio <i class="fas fa-arrow-right"></i>
-            </button>
-            <div class="intro-hint">Auto entering in <span id="intro-countdown">3</span>s</div>
+            <div class="cube-shadow"></div>
         </div>
+        
+        <div class="intro-title">Welcome to Ahmed Raza's Portfolio</div>
+        <div class="intro-subtitle">
+            <span id="intro-typing" class="typing"></span>
+        </div>
+        <button id="enter-btn" class="btn-enter" type="button">
+            Enter Portfolio <i class="fas fa-arrow-right"></i>
+        </button>
+        <div class="intro-hint">Auto entering in <span id="intro-countdown">3</span>s</div>
     </section>
 
     <div id="main-site" class="site hidden">
@@ -138,7 +150,6 @@
     <section id="skills" class="skills-modern">
         <div class="container">
             <div class="section-header">
-                <span class="section-tag">Arsenal</span>
                 <h2 class="section-title">Skills<span class="title-dot">.</span></h2>
             </div>
             <div class="skills-vip-grid">
