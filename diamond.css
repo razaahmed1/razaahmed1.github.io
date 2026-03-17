@@ -51,12 +51,12 @@ img{max-width:100%;display:block}
 ========================= */
 .bg-animation{position:fixed;inset:0;z-index:-3;pointer-events:none}
 .bg-orbs{position:fixed;inset:0;z-index:-2;pointer-events:none}
-.orb{position:absolute;width:520px;height:520px;border-radius:999px;filter:blur(70px);opacity:.30;animation:orbFloat 10s ease-in-out infinite}
+.orb{position:absolute;width:520px;height:520px;border-radius:999px;filter:blur(70px);opacity:.30;animation:orbFloat 10s ease-in-out infinite;will-change:transform, opacity;transform:translateZ(0)}
 .orb-1{left:-180px;top:-160px;background:radial-gradient(circle, rgba(167,139,250,.8), transparent 65%)}
 .orb-2{right:-200px;top:80px;animation-delay:-3s;background:radial-gradient(circle, rgba(96,165,250,.75), transparent 65%)}
 .orb-3{left:18%;bottom:-240px;animation-delay:-6s;background:radial-gradient(circle, rgba(34,211,238,.65), transparent 65%)}
-@keyframes orbFloat{0%,100%{transform:translate(0,0)}50%{transform:translate(18px,-22px)}}
-.stars{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.22;
+@keyframes orbFloat{0%,100%{transform:translate3d(0,0,0)}50%{transform:translate3d(18px,-22px,0)}}
+.stars{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.22;will-change:opacity;transform:translateZ(0);
   background-image:
     radial-gradient(1px 1px at 12% 20%, rgba(255,255,255,.6), transparent 60%),
     radial-gradient(1px 1px at 28% 72%, rgba(255,255,255,.35), transparent 60%),
@@ -66,6 +66,7 @@ img{max-width:100%;display:block}
   animation:starsPulse 8s ease-in-out infinite;
 }
 @keyframes starsPulse{0%,100%{opacity:.18}50%{opacity:.28}}
+
 
 /* =========================
    NAVBAR
@@ -3098,11 +3099,13 @@ body {
     -webkit-text-fill-color: transparent;
     filter: drop-shadow(0 0 15px rgba(167, 139, 250, 0.5));
     animation: logoFloat 4s ease-in-out infinite;
+    will-change: transform;
+    transform: translateZ(0);
 }
 
 @keyframes logoFloat {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-8px); }
+    0%, 100% { transform: translate3d(0, 0, 0); }
+    50% { transform: translate3d(0, -8px, 0); }
 }
 
 .intro-title {
