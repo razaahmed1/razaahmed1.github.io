@@ -3070,41 +3070,6 @@ body {
     pointer-events: none;
 }
 
-.intro-screen::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background-image:
-        radial-gradient(1px 1px at 12% 18%, rgba(255, 255, 255, 0.55), transparent 60%),
-        radial-gradient(1px 1px at 32% 64%, rgba(167, 243, 250, 0.45), transparent 60%),
-        radial-gradient(1px 1px at 72% 28%, rgba(129, 140, 248, 0.45), transparent 60%),
-        radial-gradient(1px 1px at 86% 76%, rgba(168, 85, 247, 0.40), transparent 60%),
-        radial-gradient(1px 1px at 52% 42%, rgba(255, 255, 255, 0.35), transparent 60%);
-    opacity: 0.25;
-    animation: introSparkle 6s ease-in-out infinite;
-    pointer-events: none;
-    mix-blend-mode: screen;
-}
-
-@keyframes introSparkle {
-    0%, 100% { opacity: 0.20; transform: translateY(0); }
-    50% { opacity: 0.35; transform: translateY(-6px); }
-}
-
-.intro-bg {
-    position: absolute;
-    inset: -40%;
-    background: conic-gradient(from 180deg, rgba(99, 102, 241, 0.28), rgba(168, 85, 247, 0.22), rgba(14, 165, 233, 0.18), rgba(99, 102, 241, 0.28));
-    filter: blur(90px);
-    opacity: 0.65;
-    animation: introSpin 12s linear infinite;
-}
-
-@keyframes introSpin {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-}
-
 .intro-content {
     position: relative !important;
     z-index: 10 !important;
