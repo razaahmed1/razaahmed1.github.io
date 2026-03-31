@@ -78,47 +78,82 @@ const init = () => {
         }
     }
 
-    function initThreeHero() {
+    function initThreeGlobalBackground() {
         try {
             const container = document.getElementById('three-container');
             if (!container || typeof THREE === 'undefined') return;
+            
             const scene = new THREE.Scene();
-            const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
-            const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true, powerPreference: "high-performance" });
             renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            container.innerHTML = '';
             container.appendChild(renderer.domElement);
+
             const cubes = [];
             const geometry = new THREE.BoxGeometry(1, 1, 1);
-            const material = new THREE.MeshStandardMaterial({ color: 0x6366f1, metalness: 0.8, roughness: 0.2 });
-            for(let i=0; i<12; i++) {
-                const cube = new THREE.Mesh(geometry, material);
-                cube.position.set((Math.random()-0.5)*12, (Math.random()-0.5)*12, (Math.random()-0.5)*5);
-                scene.add(cube);
-                cubes.push(cube);
-            }
-            const pl = new THREE.PointLight(0x6366f1, 3);
-            pl.position.set(5, 5, 5);
-            scene.add(pl);
-            scene.add(new THREE.AmbientLight(0xffffff, 0.6));
-            camera.position.z = 6;
+            const material = new THREE.MeshStandardMaterial({ 
+                color: 0x6366f1, 
+                metalness: 0.9, 
+                roughness: 0.1,
+                transparent: true,
+                opacity: 0.6
+            });
 
-            let isVisible = true;
-            const observer = new IntersectionObserver(([entry]) => {
-                isVisible = entry.isIntersecting;
-            }, { threshold: 0.1 });
-            observer.observe(container);
+            // Volumetric population (increased for heavy VIP feel)
+            const cubeCount = window.innerWidth < 768 ? 25 : 60;
+            for(let i = 0; i < cubeCount; i++) {
+                const cube = new THREE.Mesh(geometry, material);
+                // Wider spread for full-page coverage
+                cube.position.set(
+                    (Math.random() - 0.5) * 20, 
+                    (Math.random() - 0.5) * 30, // Increased Y spread
+                    (Math.random() - 0.5) * 10
+                );
+                cube.rotation.set(Math.random() * Math.PI, Math.random() * Math.PI, 0);
+                cube.scale.setScalar(Math.random() * 0.5 + 0.2);
+                scene.add(cube);
+                cubes.push({
+                    mesh: cube,
+                    speed: Math.random() * 0.005 + 0.002,
+                    rotSpeed: Math.random() * 0.01
+                });
+            }
+
+            const pl = new THREE.PointLight(0x6366f1, 15);
+            pl.position.set(10, 10, 10);
+            scene.add(pl);
+            scene.add(new THREE.AmbientLight(0xffffff, 0.8));
+            camera.position.z = 8;
 
             function animate() {
                 requestAnimationFrame(animate);
-                if (!isVisible) return;
-                cubes.forEach(c => { c.rotation.x += 0.005; c.rotation.y += 0.005; });
+                cubes.forEach(c => {
+                    c.mesh.rotation.x += c.rotSpeed;
+                    c.mesh.rotation.y += c.rotSpeed;
+                    // Subtle floating motion
+                    c.mesh.position.y += Math.sin(Date.now() * 0.001 * c.speed) * 0.01;
+                });
                 renderer.render(scene, camera);
             }
             animate();
-            window.addEventListener('scroll', () => { camera.position.y = -window.scrollY * 0.002; });
-        } catch(e) { console.error("Three.js error:", e); }
+
+            // Smooth Scroll Parallax for "Full Heavy" experience
+            window.addEventListener('scroll', () => {
+                const scrollY = window.scrollY;
+                camera.position.y = -scrollY * 0.0015;
+                camera.position.x = Math.sin(scrollY * 0.001) * 0.5;
+            });
+
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            });
+        } catch(e) { console.error("Three.js Global Error:", e); }
     }
-    initThreeHero();
+    initThreeGlobalBackground();
 
     function initHeroAnimations() {
         if (typeof gsap === 'undefined') return;
