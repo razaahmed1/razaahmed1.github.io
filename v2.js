@@ -203,7 +203,7 @@ const init = () => {
             `;
 
             const loader = new THREE.TextureLoader();
-            loader.load('ahmed.webp', 
+            loader.load('ahmed.webp?v=diamond', 
                 (texture) => {
                     console.log("Portrait Texture Loaded Successfully.");
                     const material = new THREE.ShaderMaterial({
