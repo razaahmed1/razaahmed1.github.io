@@ -530,20 +530,19 @@
         }
     </style>
     <script>
-        // EMERGENCY RECOVERY: Force-hide preloader if anything fails
+        // HIGH-PRIORITY FAIL-SAFE: Always hide preloader after 2.5s
+        setTimeout(() => {
+            const p = document.querySelector('.preloader');
+            if(p) {
+                p.classList.add('hide-preloader');
+                setTimeout(() => { p.style.display = 'none'; }, 1000);
+            }
+        }, 2500);
+
         window.onerror = function() {
-            setTimeout(() => {
-                const p = document.querySelector('.preloader');
-                if(p) p.style.display = 'none';
-            }, 1000);
+            const p = document.querySelector('.preloader');
+            if(p) p.style.display = 'none';
         };
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                const p = document.querySelector('.preloader');
-                if(p) p.classList.add('hide-preloader');
-                setTimeout(() => { if(p) p.style.display = 'none'; }, 1000);
-            }, 5000); // 5s absolute fallback
-        });
 
         // Refresh at Top Logic
         if (history.scrollRestoration) {
@@ -564,14 +563,13 @@
     <!-- Scroll Progress -->
     <div id="v2-scroll-progress" class="scroll-progress"></div>
 
-    <!-- Preloader Bypassed for Stability -->
-    <!-- 
+    <!-- Preloader -->
     <div id="v2-preloader" class="preloader">
         <div class="scan-line"></div>
         <div class="relative group">
             <div class="v2-preloader-glow opacity-100"></div>
             <div class="text-6xl md:text-8xl font-heading font-black italic tracking-tighter mb-4 opacity-0 v2-preloader-logo glitch-hover diamond-logo relative z-10">
-                AHMED<span class="text-primary">.</span>
+                AHMAD<span class="text-primary">.</span>
             </div>
             <div class="absolute -bottom-2 md:-bottom-4 left-0 w-full text-[9px] uppercase tracking-[0.6em] text-white/60 font-black text-center opacity-0 v2-preloader-student-tag z-10">Undergraduate Portfolio</div>
         </div>
@@ -583,9 +581,9 @@
                 <div class="loader-percent text-[10px] uppercase tracking-[0.4em] text-slate-500 font-black">0%</div>
                 <div class="v2-preloader-status text-[10px] uppercase tracking-[0.4em] text-slate-700 font-black">Initialising System</div>
             </div>
-           
+            <div class="text-[8px] uppercase tracking-[0.6em] text-indigo-500/50 font-black animate-pulse">Bio-Metric Scan Active</div>
+        </div>
     </div>
-    -->
 
     <!-- Main Site -->
     <main id="v2-main" class="relative">
