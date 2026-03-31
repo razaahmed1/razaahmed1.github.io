@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="js-enabled">
 
 <head>
     <meta charset="UTF-8">
@@ -22,7 +22,7 @@
     <meta property="twitter:description" content="Building premium web apps with Laravel & PHP. Clean code, Modern UI, Scalable systems.">
     <meta property="twitter:image" content="ahmed.webp">
 
-    <title>Ahmed Raza | Full Stack Web Developer</title>
+    <title>Ahmed Raza | Portfolio</title>
     
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="favicon.ico">
@@ -101,9 +101,14 @@
         }
 
         .v2-reveal {
+            opacity: 1;
+            transform: none;
+            will-change: transform, opacity;
+        }
+        
+        .js-enabled .v2-reveal {
             opacity: 0;
             transform: translateY(2rem);
-            will-change: transform, opacity;
         }
 
         .diamond-logo {
@@ -316,6 +321,16 @@
             }
         }
     </style>
+    <script>
+        // Failsafe: Hide preloader if JS fails to initialize
+        setTimeout(() => {
+            const preloader = document.getElementById('v2-preloader');
+            if (preloader && preloader.style.display !== 'none') {
+                preloader.style.opacity = '0';
+                setTimeout(() => preloader.style.display = 'none', 1000);
+            }
+        }, 5000);
+    </script>
 </head>
 
 <body class="bg-dark text-white selection:bg-primary/30 overflow-x-hidden">
