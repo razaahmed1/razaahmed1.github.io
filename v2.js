@@ -295,15 +295,15 @@ const init = () => {
             }
 
             const skillsData = [
-                { name: 'HTML', icon: 'fab fa-html5', color: '#f06529', glow: 'rgba(240, 101, 41, 0.5)', progress: '95%' },
-                { name: 'CSS', icon: 'fab fa-css3-alt', color: '#2965f1', glow: 'rgba(41, 101, 241, 0.5)', progress: '90%' },
-                { name: 'JS', icon: 'fab fa-js', color: '#f0db4f', glow: 'rgba(240, 219, 79, 0.5)', progress: '85%' },
-                { name: 'PHP', icon: 'fab fa-php', color: '#8993be', glow: 'rgba(137, 147, 190, 0.5)', progress: '88%' },
-                { name: 'Laravel', icon: 'fab fa-laravel', color: '#ff2d20', glow: 'rgba(255, 45, 32, 0.5)', progress: '80%' },
-                { name: 'MySQL', icon: 'fas fa-database', color: '#00758f', glow: 'rgba(0, 117, 143, 0.5)', progress: '82%' },
-                { name: 'Git', icon: 'fab fa-git-alt', color: '#f1502f', glow: 'rgba(241, 80, 47, 0.5)', progress: '78%' },
-                { name: 'Python', icon: 'fab fa-python', color: '#3776ab', glow: 'rgba(55, 118, 171, 0.5)', progress: '92%' },
-                { name: 'AI/ML', icon: 'fas fa-brain', color: '#00ffff', glow: 'rgba(0, 255, 255, 0.5)', progress: '86%' }
+                { name: 'HTML', icon: 'fab fa-html5', color: '#f06529', glow: 'rgba(240, 101, 41, 0.3)', progress: '95%' },
+                { name: 'CSS', icon: 'fab fa-css3-alt', color: '#2965f1', glow: 'rgba(41, 101, 241, 0.3)', progress: '90%' },
+                { name: 'JS', icon: 'fab fa-js', color: '#f0db4f', glow: 'rgba(240, 219, 79, 0.3)', progress: '85%' },
+                { name: 'PHP', icon: 'fab fa-php', color: '#8993be', glow: 'rgba(137, 147, 190, 0.3)', progress: '88%' },
+                { name: 'Laravel', icon: 'fab fa-laravel', color: '#ff2d20', glow: 'rgba(255, 45, 32, 0.3)', progress: '80%' },
+                { name: 'MySQL', icon: 'fas fa-database', color: '#00758f', glow: 'rgba(0, 117, 143, 0.3)', progress: '82%' },
+                { name: 'Git', icon: 'fab fa-git-alt', color: '#f1502f', glow: 'rgba(241, 80, 47, 0.3)', progress: '78%' },
+                { name: 'Python', icon: 'fab fa-python', color: '#3776ab', glow: 'rgba(55, 118, 171, 0.3)', progress: '92%' },
+                { name: 'AI/ML', icon: 'fas fa-brain', color: '#00ffff', glow: 'rgba(0, 255, 255, 0.3)', progress: '86%' }
             ];
 
             const wallThickness = 100;
@@ -316,11 +316,11 @@ const init = () => {
             World.add(engine.world, walls);
 
             const balls = [];
-            const ballSize = 110;
+            const ballSize = 85;
 
             skillsData.forEach((skill, i) => {
                 const ball = Bodies.circle(Math.random()*width, Math.random()*height, ballSize/2, {
-                    restitution: 0.8, friction: 0.005, frictionAir: 0.012, render: { fillStyle: 'transparent' }
+                    restitution: 0.9, friction: 0.002, frictionAir: 0.015, render: { fillStyle: 'transparent' }
                 });
                 const el = document.createElement('div');
                 el.className = 'skill-ball';

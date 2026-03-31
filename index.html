@@ -197,27 +197,68 @@
         /* Physics Skills Styles */
         #skills-container {
             width: 100%;
-            height: 600px;
+            max-width: 600px;
+            height: 450px;
             position: relative;
-            overflow: hidden;
-            border-radius: 2.5rem;
-            background: radial-gradient(circle at 50% 50%, rgba(15, 23, 42, 0.5), rgba(2, 6, 23, 0.8));
+            overflow: visible;
+            margin: 0 auto;
+            perspective: 2000px;
+        }
+
+        .skills-glass-box {
+            position: absolute;
+            inset: 0;
+            transform-style: preserve-3d;
+            transform: rotateX(10deg) rotateY(0deg);
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 2rem;
             border: 1px solid rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(20px);
-            box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.5);
+            box-shadow: 
+                0 30px 100px rgba(0, 0, 0, 0.5),
+                inset 0 0 50px rgba(99, 102, 241, 0.1);
+        }
+
+        /* 3D Sides */
+        .skills-glass-box::before, .skills-glass-box::after {
+            content: '';
+            position: absolute;
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.05), transparent);
+            pointer-events: none;
+        }
+
+        /* Left Side */
+        .skills-glass-box::before {
+            width: 80px;
+            height: 100%;
+            left: -40px;
+            top: 0;
+            transform: rotateY(90deg);
+            border-left: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Bottom Side (Floor) */
+        .skills-glass-box::after {
+            width: 100%;
+            height: 80px;
+            bottom: -40px;
+            left: 0;
+            transform: rotateX(90deg);
+            background: radial-gradient(circle at 50% 0%, rgba(99, 102, 241, 0.2), transparent 70%);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         #skills-canvas-bg {
             position: absolute;
             inset: 0;
             pointer-events: none;
-            opacity: 0.3;
+            opacity: 0.2;
+            border-radius: inherit;
         }
 
         .skill-ball {
             position: absolute;
-            width: 110px;
-            height: 110px;
+            width: 85px;
+            height: 85px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -225,34 +266,31 @@
             cursor: grab;
             user-select: none;
             touch-action: none;
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.03));
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.15);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.02));
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             box-shadow: 
-                0 15px 40px -10px rgba(0, 0, 0, 0.6),
-                inset 0 0 20px rgba(255, 255, 255, 0.05);
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+                0 10px 20px rgba(0, 0, 0, 0.4),
+                inset 0 0 15px rgba(255, 255, 255, 0.05);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             will-change: transform;
             z-index: 10;
         }
 
-        .skill-inner-glow {
+        /* 3D Reflection/Shadow on floor */
+        .skill-ball::after {
+            content: '';
             position: absolute;
-            inset: 5px;
-            border-radius: 50%;
-            background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.1), transparent 70%);
+            bottom: -30px;
+            left: 50%;
+            width: 60%;
+            height: 10px;
+            background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.3), transparent 70%);
+            transform: translateX(-50%) rotateX(80deg);
+            filter: blur(4px);
             pointer-events: none;
-        }
-
-        .skill-ball:hover {
-            border-color: var(--skill-color);
-            transform: scale(1.1);
-            background: rgba(255, 255, 255, 0.08);
-            box-shadow: 
-                0 0 50px -10px var(--glow-color),
-                inset 0 0 30px -10px var(--glow-color);
-            z-index: 100;
+            opacity: 0.5;
         }
 
         .skill-ball i {
@@ -743,19 +781,23 @@
             </div>
         </section>
 
-        <!-- Skills Section (Elite Polish) -->
-        <section id="skills" class="relative py-24 md:py-48 px-4 z-10 bg-slate-950/50 overflow-hidden">
+        <!-- Skills Section (3D Cube) -->
+        <section id="skills" class="relative py-24 md:py-48 px-4 z-10 overflow-hidden bg-transparent">
             <div class="container mx-auto">
                 <div class="flex flex-col items-center mb-24 v2-reveal">
-                    <span class="text-[10px] uppercase tracking-[0.5em] font-black text-indigo-500 mb-4 font-black tracking-widest uppercase">Technical Aura</span>
+                    <span class="text-[10px] uppercase tracking-[0.5em] font-black text-indigo-500 mb-4 font-black tracking-widest uppercase text-center">Technical Aura</span>
                     <h2 class="text-6xl md:text-9xl font-heading font-black text-center italic tracking-tighter">
                         My <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 via-sky-400 to-emerald-400 font-black">Skills</span><span class="text-indigo-500 font-black">.</span>
                     </h2>
                 </div>
-                </div>
 
                 <div id="skills-container" class="v2-reveal">
-                    <canvas id="skills-canvas-bg"></canvas>
+                    <div class="skills-glass-box">
+                        <canvas id="skills-canvas-bg"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
                     <!-- Skills will be injected here by JS -->
                 </div>
             </div>
