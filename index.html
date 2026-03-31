@@ -368,9 +368,27 @@
 
         .skill-card-ribbon i {
             font-size: 2rem;
-            color: var(--primary);
-            filter: drop-shadow(0 0 8px rgba(99, 102, 241, 0.5));
+            transition: all 0.3s ease;
         }
+
+        /* Original Brand Colors */
+        .color-html { color: #e34c26; filter: drop-shadow(0 0 10px rgba(227, 76, 38, 0.3)); }
+        .color-css { color: #264de4; filter: drop-shadow(0 0 10px rgba(38, 77, 228, 0.3)); }
+        .color-js { color: #f7df1e; filter: drop-shadow(0 0 10px rgba(247, 223, 30, 0.3)); }
+        .color-bootstrap { color: #7952b3; filter: drop-shadow(0 0 10px rgba(121, 82, 179, 0.3)); }
+        .color-tailwind { color: #06b6d4; filter: drop-shadow(0 0 10px rgba(6, 182, 212, 0.3)); }
+        .color-react { color: #61dafb; filter: drop-shadow(0 0 10px rgba(97, 218, 251, 0.3)); }
+        .color-node { color: #339933; filter: drop-shadow(0 0 10px rgba(51, 153, 51, 0.3)); }
+        .color-mongo { color: #47a248; filter: drop-shadow(0 0 10px rgba(71, 162, 72, 0.3)); }
+        .color-mysql { color: #00758f; filter: drop-shadow(0 0 10px rgba(0, 117, 143, 0.3)); }
+        .color-php { color: #777bb4; filter: drop-shadow(0 0 10px rgba(119, 123, 180, 0.3)); }
+        .color-laravel { color: #ff2d20; filter: drop-shadow(0 0 10px rgba(255, 45, 32, 0.3)); }
+        .color-postgres { color: #336791; filter: drop-shadow(0 0 10px rgba(51, 103, 145, 0.3)); }
+        .color-git { color: #f05032; filter: drop-shadow(0 0 10px rgba(240, 80, 50, 0.3)); }
+        .color-figma { color: #f24e1e; filter: drop-shadow(0 0 10px rgba(242, 78, 30, 0.3)); }
+        .color-vscode { color: #007acc; filter: drop-shadow(0 0 10px rgba(0, 122, 204, 0.3)); }
+        .color-postman { color: #ff6c37; filter: drop-shadow(0 0 10px rgba(255, 108, 55, 0.3)); }
+        .color-plain { color: #cbd5e1; filter: drop-shadow(0 0 10px rgba(203, 213, 225, 0.2)); }
 
         .skill-name-ribbon {
             font-size: 11px;
@@ -823,66 +841,57 @@
                 <div class="skills-marquee-container v2-reveal">
                     <!-- Row 1: Frontend (Right) -->
                     <div class="skill-ribbon row-right">
-                        <!-- Duplicated for seamless loop -->
-                        <div class="skill-card-ribbon"><i class="fab fa-react"></i><span class="skill-name-ribbon">React.js</span></div>
-                        <div class="skill-card-ribbon"><i class="fab fa-node-js"></i><span class="skill-name-ribbon">Next.js</span></div>
-                        <div class="skill-card-ribbon"><i class="fab fa-html5"></i><span class="skill-name-ribbon">HTML5</span></div>
-                        <div class="skill-card-ribbon"><i class="fab fa-css3-alt"></i><span class="skill-name-ribbon">CSS3</span></div>
-                        <div class="skill-card-ribbon"><i class="fab fa-js"></i><span class="skill-name-ribbon">JavaScript</span></div>
-                        <div class="skill-card-ribbon"><i class="fab fa-bootstrap"></i><span class="skill-name-ribbon">Bootstrap</span></div>
-                        <div class="skill-card-ribbon"><i class="fas fa-code"></i><span class="skill-name-ribbon">Tailwind</span></div>
-                        <div class="skill-card-ribbon"><i class="fab fa-react"></i><span class="skill-name-ribbon">TypeScript</span></div>
+                        <div class="skill-card-ribbon"><i class="fab fa-react color-react"></i><span class="skill-name-ribbon">React.js</span></div>
+                        <div class="skill-card-ribbon"><i class="fab fa-html5 color-html"></i><span class="skill-name-ribbon">HTML5</span></div>
+                        <div class="skill-card-ribbon"><i class="fab fa-css3-alt color-css"></i><span class="skill-name-ribbon">CSS3</span></div>
+                        <div class="skill-card-ribbon"><i class="fab fa-js color-js"></i><span class="skill-name-ribbon">JavaScript</span></div>
+                        <div class="skill-card-ribbon"><i class="fab fa-bootstrap color-bootstrap"></i><span class="skill-name-ribbon">Bootstrap</span></div>
+                        <div class="skill-card-ribbon"><i class="fas fa-code color-tailwind"></i><span class="skill-name-ribbon">Tailwind</span></div>
                         <!-- Repeat -->
-                        <div class="skill-card-ribbon"><i class="fab fa-react"></i><span class="skill-name-ribbon">React.js</span></div>
-                        <div class="skill-card-ribbon"><i class="fab fa-node-js"></i><span class="skill-name-ribbon">Next.js</span></div>
-                        <div class="skill-card-ribbon"><i class="fab fa-html5"></i><span class="skill-name-ribbon">HTML5</span></div>
-                        <div class="skill-card-ribbon"><i class="fab fa-css3-alt"></i><span class="skill-name-ribbon">CSS3</span></div>
-                        <div class="skill-card-ribbon"><i class="fab fa-js"></i><span class="skill-name-ribbon">JavaScript</span></div>
-                        <div class="skill-card-ribbon"><i class="fab fa-bootstrap"></i><span class="skill-name-ribbon">Bootstrap</span></div>
-                        <div class="skill-card-ribbon"><i class="fas fa-code"></i><span class="skill-name-ribbon">Tailwind</span></div>
-                        <div class="skill-card-ribbon"><i class="fab fa-react"></i><span class="skill-name-ribbon">TypeScript</span></div>
+                        <div class="skill-card-ribbon"><i class="fab fa-react color-react"></i><span class="skill-name-ribbon">React.js</span></div>
+                        <div class="skill-card-ribbon"><i class="fab fa-html5 color-html"></i><span class="skill-name-ribbon">HTML5</span></div>
+                        <div class="skill-card-ribbon"><i class="fab fa-css3-alt color-css"></i><span class="skill-name-ribbon">CSS3</span></div>
+                        <div class="skill-card-ribbon"><i class="fab fa-js color-js"></i><span class="skill-name-ribbon">JavaScript</span></div>
+                        <div class="skill-card-ribbon"><i class="fab fa-bootstrap color-bootstrap"></i><span class="skill-name-ribbon">Bootstrap</span></div>
+                        <div class="skill-card-ribbon"><i class="fas fa-code color-tailwind"></i><span class="skill-name-ribbon">Tailwind</span></div>
                     </div>
 
                     <!-- Row 2: Backend & DB (Left) -->
                     <div class="skill-ribbon row-left">
-                        <div class="skill-card-ribbon"><i class="fas fa-server"></i><span class="skill-name-ribbon">Node.js</span></div>
-                        <div class="skill-card-ribbon"><i class="fas fa-database"></i><span class="skill-name-ribbon">MongoDB</span></div>
-                        <div class="skill-card-ribbon"><i class="fas fa-database"></i><span class="skill-name-ribbon">MySQL</span></div>
-                        <div class="skill-card-ribbon"><i class="fab fa-php"></i><span class="skill-name-ribbon">PHP</span></div>
-                        <div class="skill-card-ribbon"><i class="fab fa-laravel"></i><span class="skill-name-ribbon">Laravel</span></div>
-                        <div class="skill-card-ribbon"><i class="fas fa-database"></i><span class="skill-name-ribbon">PostgreSQL</span></div>
-                        <div class="skill-card-ribbon"><i class="fas fa-fire"></i><span class="skill-name-ribbon">Firebase</span></div>
-                        <div class="skill-card-ribbon"><i class="fas fa-bolt"></i><span class="skill-name-ribbon">Express.js</span></div>
+                        <div class="skill-card-ribbon"><i class="fas fa-server color-node"></i><span class="skill-name-ribbon">Node.js</span></div>
+                        <div class="skill-card-ribbon"><i class="fas fa-database color-mongo"></i><span class="skill-name-ribbon">MongoDB</span></div>
+                        <div class="skill-card-ribbon"><i class="fas fa-database color-mysql"></i><span class="skill-name-ribbon">MySQL</span></div>
+                        <div class="skill-card-ribbon"><i class="fab fa-php color-php"></i><span class="skill-name-ribbon">PHP</span></div>
+                        <div class="skill-card-ribbon"><i class="fab fa-laravel color-laravel"></i><span class="skill-name-ribbon">Laravel</span></div>
+                        <div class="skill-card-ribbon"><i class="fas fa-database color-postgres"></i><span class="skill-name-ribbon">PostgreSQL</span></div>
                         <!-- Repeat -->
-                        <div class="skill-card-ribbon"><i class="fas fa-server"></i><span class="skill-name-ribbon">Node.js</span></div>
-                        <div class="skill-card-ribbon"><i class="fas fa-database"></i><span class="skill-name-ribbon">MongoDB</span></div>
-                        <div class="skill-card-ribbon"><i class="fas fa-database"></i><span class="skill-name-ribbon">MySQL</span></div>
-                        <div class="skill-card-ribbon"><i class="fab fa-php"></i><span class="skill-name-ribbon">PHP</span></div>
-                        <div class="skill-card-ribbon"><i class="fab fa-laravel"></i><span class="skill-name-ribbon">Laravel</span></div>
-                        <div class="skill-card-ribbon"><i class="fas fa-database"></i><span class="skill-name-ribbon">PostgreSQL</span></div>
-                        <div class="skill-card-ribbon"><i class="fas fa-fire"></i><span class="skill-name-ribbon">Firebase</span></div>
-                        <div class="skill-card-ribbon"><i class="fas fa-bolt"></i><span class="skill-name-ribbon">Express.js</span></div>
+                        <div class="skill-card-ribbon"><i class="fas fa-server color-node"></i><span class="skill-name-ribbon">Node.js</span></div>
+                        <div class="skill-card-ribbon"><i class="fas fa-database color-mongo"></i><span class="skill-name-ribbon">MongoDB</span></div>
+                        <div class="skill-card-ribbon"><i class="fas fa-database color-mysql"></i><span class="skill-name-ribbon">MySQL</span></div>
+                        <div class="skill-card-ribbon"><i class="fab fa-php color-php"></i><span class="skill-name-ribbon">PHP</span></div>
+                        <div class="skill-card-ribbon"><i class="fab fa-laravel color-laravel"></i><span class="skill-name-ribbon">Laravel</span></div>
+                        <div class="skill-card-ribbon"><i class="fas fa-database color-postgres"></i><span class="skill-name-ribbon">PostgreSQL</span></div>
                     </div>
 
                     <!-- Row 3: Tools & Cyber (Right) -->
                     <div class="skill-ribbon row-right">
-                        <div class="skill-card-ribbon"><i class="fab fa-git-alt"></i><span class="skill-name-ribbon">Git</span></div>
-                        <div class="skill-card-ribbon"><i class="fab fa-github"></i><span class="skill-name-ribbon">GitHub</span></div>
-                        <div class="skill-card-ribbon"><i class="fab fa-figma"></i><span class="skill-name-ribbon">Figma</span></div>
-                        <div class="skill-card-ribbon"><i class="fas fa-microchip"></i><span class="skill-name-ribbon">Operating Systems</span></div>
-                        <div class="skill-card-ribbon"><i class="fas fa-lock"></i><span class="skill-name-ribbon">Cryptography</span></div>
-                        <div class="skill-card-ribbon"><i class="fas fa-user-shield"></i><span class="skill-name-ribbon">Cyber Security</span></div>
-                        <div class="skill-card-ribbon"><i class="fas fa-terminal"></i><span class="skill-name-ribbon">VS Code</span></div>
-                        <div class="skill-card-ribbon"><i class="fas fa-paper-plane"></i><span class="skill-name-ribbon">Postman</span></div>
+                        <div class="skill-card-ribbon"><i class="fab fa-git-alt color-git"></i><span class="skill-name-ribbon">Git</span></div>
+                        <div class="skill-card-ribbon"><i class="fab fa-github color-plain"></i><span class="skill-name-ribbon">GitHub</span></div>
+                        <div class="skill-card-ribbon"><i class="fab fa-figma color-figma"></i><span class="skill-name-ribbon">Figma</span></div>
+                        <div class="skill-card-ribbon"><i class="fas fa-microchip color-plain"></i><span class="skill-name-ribbon">Operating Systems</span></div>
+                        <div class="skill-card-ribbon"><i class="fas fa-lock color-plain"></i><span class="skill-name-ribbon">Cryptography</span></div>
+                        <div class="skill-card-ribbon"><i class="fas fa-user-shield color-plain"></i><span class="skill-name-ribbon">Cyber Security</span></div>
+                        <div class="skill-card-ribbon"><i class="fas fa-terminal color-vscode"></i><span class="skill-name-ribbon">VS Code</span></div>
+                        <div class="skill-card-ribbon"><i class="fas fa-paper-plane color-postman"></i><span class="skill-name-ribbon">Postman</span></div>
                         <!-- Repeat -->
-                        <div class="skill-card-ribbon"><i class="fab fa-git-alt"></i><span class="skill-name-ribbon">Git</span></div>
-                        <div class="skill-card-ribbon"><i class="fab fa-github"></i><span class="skill-name-ribbon">GitHub</span></div>
-                        <div class="skill-card-ribbon"><i class="fab fa-figma"></i><span class="skill-name-ribbon">Figma</span></div>
-                        <div class="skill-card-ribbon"><i class="fas fa-microchip"></i><span class="skill-name-ribbon">Operating Systems</span></div>
-                        <div class="skill-card-ribbon"><i class="fas fa-lock"></i><span class="skill-name-ribbon">Cryptography</span></div>
-                        <div class="skill-card-ribbon"><i class="fas fa-user-shield"></i><span class="skill-name-ribbon">Cyber Security</span></div>
-                        <div class="skill-card-ribbon"><i class="fas fa-terminal"></i><span class="skill-name-ribbon">VS Code</span></div>
-                        <div class="skill-card-ribbon"><i class="fas fa-paper-plane"></i><span class="skill-name-ribbon">Postman</span></div>
+                        <div class="skill-card-ribbon"><i class="fab fa-git-alt color-git"></i><span class="skill-name-ribbon">Git</span></div>
+                        <div class="skill-card-ribbon"><i class="fab fa-github color-plain"></i><span class="skill-name-ribbon">GitHub</span></div>
+                        <div class="skill-card-ribbon"><i class="fab fa-figma color-figma"></i><span class="skill-name-ribbon">Figma</span></div>
+                        <div class="skill-card-ribbon"><i class="fas fa-microchip color-plain"></i><span class="skill-name-ribbon">Operating Systems</span></div>
+                        <div class="skill-card-ribbon"><i class="fas fa-lock color-plain"></i><span class="skill-name-ribbon">Cryptography</span></div>
+                        <div class="skill-card-ribbon"><i class="fas fa-user-shield color-plain"></i><span class="skill-name-ribbon">Cyber Security</span></div>
+                        <div class="skill-card-ribbon"><i class="fas fa-terminal color-vscode"></i><span class="skill-name-ribbon">VS Code</span></div>
+                        <div class="skill-card-ribbon"><i class="fas fa-paper-plane color-postman"></i><span class="skill-name-ribbon">Postman</span></div>
                     </div>
                 </div>
             </div>
