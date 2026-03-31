@@ -79,11 +79,21 @@ const init = () => {
                 scene.add(cube);
                 cubes.push(cube);
             }
-            scene.add(new THREE.PointLight(0x6366f1, 2).set(2, 3, 4));
-            scene.add(new THREE.AmbientLight(0xffffff, 0.5));
+            const pl = new THREE.PointLight(0x6366f1, 3);
+            pl.position.set(5, 5, 5);
+            scene.add(pl);
+            scene.add(new THREE.AmbientLight(0xffffff, 0.6));
             camera.position.z = 6;
+
+            let isVisible = true;
+            const observer = new IntersectionObserver(([entry]) => {
+                isVisible = entry.isIntersecting;
+            }, { threshold: 0.1 });
+            observer.observe(container);
+
             function animate() {
                 requestAnimationFrame(animate);
+                if (!isVisible) return;
                 cubes.forEach(c => { c.rotation.x += 0.005; c.rotation.y += 0.005; });
                 renderer.render(scene, camera);
             }
