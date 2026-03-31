@@ -207,8 +207,8 @@
                             <!-- Three.js Portrait Mesh will be injected here -->
                             <div class="absolute inset-0 bg-gradient-to-t from-dark/60 via-transparent to-transparent pointer-events-none z-10"></div>
                             
-                            <!-- Static Fallback if ThreeJS fails -->
-                            <img src="ahmed.webp?v=diamond" alt="Ahmed Raza" class="portrait-fallback w-full h-full object-cover opacity-0 transition-opacity duration-700">
+                            <!-- Static Fallback (Visible by default, hidden by v2.js only on 3D success) -->
+                            <img src="ahmed.webp?v=diamond" alt="Ahmed Raza" class="portrait-fallback w-full h-full object-cover opacity-100 transition-opacity duration-700">
                         </div>
                     </div>
 
@@ -654,6 +654,6 @@
         </footer>
     </main>
 
-    <script src="v2.js?v=final_diamond"></script>
+    <script src="v2.js?v=force_refresh_ahmed_official_v2"></script>
 </body>
 </html>
