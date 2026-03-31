@@ -33,7 +33,13 @@ const init = () => {
         const progress = document.querySelector('.loader-progress');
         const progressText = document.querySelector('.loader-percent');
         const preloaderStatus = document.querySelector('.v2-preloader-status');
-        const statuses = ["Initialising System", "Loading Assets", "Searching for Diamonds", "Ahmed Raza: UG SE"];
+        const statuses = [
+            "Accessing Core Architecture",
+            "Initialising Neural Pathways",
+            "Synthesizing Diamond Particles",
+            "Syncing Bio-Metric Handlers",
+            "Ahmed Raza: Verification Final"
+        ];
         let loadProgress = 0;
         const interval = setInterval(() => {
             loadProgress += Math.random() * 15;
