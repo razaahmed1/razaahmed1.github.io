@@ -563,7 +563,7 @@
         <div class="relative group">
             <div class="v2-preloader-glow opacity-100"></div>
             <div class="text-6xl md:text-8xl font-heading font-black italic tracking-tighter mb-4 opacity-0 v2-preloader-logo glitch-hover diamond-logo relative z-10">
-                AHMAD<span class="text-primary">.</span>
+                AHMED<span class="text-primary">.</span>
             </div>
             <div class="absolute -bottom-2 md:-bottom-4 left-0 w-full text-[9px] uppercase tracking-[0.6em] text-white/60 font-black text-center opacity-0 v2-preloader-student-tag z-10">Undergraduate Portfolio</div>
         </div>
@@ -575,8 +575,7 @@
                 <div class="loader-percent text-[10px] uppercase tracking-[0.4em] text-slate-500 font-black">0%</div>
                 <div class="v2-preloader-status text-[10px] uppercase tracking-[0.4em] text-slate-700 font-black">Initialising System</div>
             </div>
-            <div class="text-[8px] uppercase tracking-[0.6em] text-indigo-500/50 font-black animate-pulse">Bio-Metric Scan Active</div>
-        </div>
+           
     </div>
 
     <!-- Main Site -->
@@ -588,7 +587,7 @@
     <nav class="fixed top-0 left-0 w-full z-[100] transition-all duration-500 glass px-6 py-4">
         <div class="container mx-auto flex items-center justify-between">
             <a href="#hero" class="text-2xl font-heading font-black tracking-tighter hover:scale-105 transition-transform diamond-logo">
-                AHMAD<span class="text-primary font-black">.</span>
+                AHMED<span class="text-primary font-black">.</span>
             </a>
             
             <div class="hidden md:flex items-center gap-10">
@@ -616,7 +615,7 @@
                     </div>
 
                     <h1 class="v2-hero-title text-7xl md:text-8xl lg:text-[10rem] font-heading font-black tracking-tighter leading-[0.8] mb-8">
-                        <span class="block overflow-hidden"><span class="block font-black">AHMAD</span></span>
+                        <span class="block overflow-hidden"><span class="block font-black">AHMED</span></span>
                         <span class="block overflow-hidden"><span class="block text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 via-sky-400 to-emerald-400 font-black">RAZA</span></span>
                     </h1>
 
@@ -663,18 +662,21 @@
                 </div>
 
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-                    <!-- Left: Portrait -->
-                    <div class="relative v2-reveal">
-                        <div class="absolute -inset-10 bg-indigo-500/10 blur-[100px] rounded-full"></div>
-                        <div class="relative aspect-square max-w-md mx-auto rounded-[3rem] overflow-hidden glass border border-white/10 group">
-                            <img src="ahmed.webp" alt="Ahmad Raza" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-                            <div class="absolute inset-0 bg-gradient-to-t from-dark/80 via-transparent to-transparent"></div>
+                    <!-- Left: Portrait (3D Neural Portal) -->
+                    <div class="relative v2-reveal min-h-[500px]">
+                        <div class="absolute -inset-10 bg-indigo-500/10 blur-[120px] rounded-full"></div>
+                        <div id="portrait-3d-portal" class="relative w-full aspect-square max-w-md mx-auto rounded-[3rem] overflow-hidden border border-white/10 group cursor-pointer shadow-2xl">
+                            <!-- Three.js Portrait Mesh will be injected here -->
+                            <div class="absolute inset-0 bg-gradient-to-t from-dark/60 via-transparent to-transparent pointer-events-none z-10"></div>
+                            
+                            <!-- Static Fallback if ThreeJS fails -->
+                            <img src="ahmed.webp" alt="Ahmad Raza" class="portrait-fallback w-full h-full object-cover opacity-0 transition-opacity duration-700">
                         </div>
                     </div>
 
                     <!-- Right: Bio -->
                     <div class="glass-card p-12 v2-reveal">
-                        <h3 class="text-3xl font-heading font-black mb-6 font-black">Ahmad Raza</h3>
+                        <h3 class="text-3xl font-heading font-black mb-6 font-black">Ahmed Raza</h3>
                         <p class="text-slate-400 leading-relaxed mb-8 font-medium">
                             I specialize in building robust web applications using modern technologies for both frontend and backend. My expertise includes designing scalable architectures, working with databases, and delivering seamless user experiences.<br/><br/>
                             As an undergraduate Software Engineer, I am highly motivated to solve real-world problems through clean architecture and premium user experiences.
@@ -1038,7 +1040,7 @@
                             <img src="C:\Users\ahmed\.gemini\antigravity\brain\e35d0d0e-b6e0-485d-87b6-b277f89bac94\contact_handshake_vip_1774944191681.png" alt="Collaborate" class="w-full rounded-2xl mb-8 border border-white/5 object-cover grayscale hover:grayscale-0 transition-all duration-700 aspect-video">
                             <div class="space-y-6">
                                 <h3 class="text-6xl font-heading font-black italic leading-[0.8] mb-2">Ahmad<br>Raza</h3>
-                                <div class="text-indigo-400 text-[10px] uppercase tracking-[0.4em] font-black mb-8 block">MERN STACK DEVELOPER</div>
+                                <div class="text-indigo-400 text-[10px] uppercase tracking-[0.4em] font-black mb-8 block">FULL STACK DEVELOPER</div>
                                 <p class="text-slate-400 text-sm leading-relaxed font-medium mb-10">
                                     I'm a self-taught fullstack Nextjs developer passionate about turning ideas into real-world applications. Currently building full-stack projects and growing one line of code at a time.
                                 </p>
@@ -1046,11 +1048,11 @@
                                 <div class="space-y-4">
                                     <div class="flex items-center gap-4 text-slate-300">
                                         <i class="fas fa-phone-alt text-indigo-500 text-xs"></i>
-                                        <span class="text-xs font-black tracking-widest">+92 3106546012</span>
+                                        <span class="text-xs font-black tracking-widest">+92 3337343939</span>
                                     </div>
                                     <div class="flex items-center gap-4 text-slate-300">
                                         <i class="fas fa-envelope text-indigo-500 text-xs"></i>
-                                        <span class="text-xs font-black tracking-widest">ahmadaraza01708@gmail.com</span>
+                                        <span class="text-xs font-black tracking-widest">ahmedmazari111@gmail.com</span>
                                     </div>
                                 </div>
 

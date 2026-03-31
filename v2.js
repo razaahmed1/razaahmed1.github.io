@@ -153,7 +153,97 @@ const init = () => {
             });
         } catch(e) { console.error("Three.js Global Error:", e); }
     }
+    function initPortrait3D() {
+        const container = document.getElementById('portrait-3d-portal');
+        if (!container || typeof THREE === 'undefined') return;
+
+        try {
+            const width = container.clientWidth;
+            const height = container.clientHeight;
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(40, width / height, 0.1, 1000);
+            camera.position.z = 2.5;
+
+            const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+            renderer.setSize(width, height);
+            renderer.setPixelRatio(window.devicePixelRatio);
+            container.appendChild(renderer.domElement);
+
+            // Chroma Key Shader
+            const vertexShader = `
+                varying vec2 vUv;
+                void main() {
+                    vUv = uv;
+                    gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+                }
+            `;
+
+            const fragmentShader = `
+                uniform sampler2D map;
+                varying vec2 vUv;
+                void main() {
+                    vec4 color = texture2D(map, vUv);
+                    // Blue range: B > R && B > G
+                    float blueStrength = color.b - max(color.r, color.g);
+                    float alpha = 1.0;
+                    if(blueStrength > 0.05) {
+                        alpha = smoothstep(0.15, 0.05, blueStrength);
+                    }
+                    gl_FragColor = vec4(color.rgb, alpha * color.a);
+                }
+            `;
+
+            const loader = new THREE.TextureLoader();
+            loader.load('ahmed.webp', (texture) => {
+                const material = new THREE.ShaderMaterial({
+                    uniforms: { map: { value: texture } },
+                    vertexShader,
+                    fragmentShader,
+                    transparent: true,
+                    side: THREE.DoubleSide
+                });
+
+                const geometry = new THREE.PlaneGeometry(2, 2);
+                const mesh = new THREE.Mesh(geometry, material);
+                scene.add(mesh);
+
+                // Mouse Parallax Logic
+                let targetRotationX = 0;
+                let targetRotationY = 0;
+
+                window.addEventListener('mousemove', (e) => {
+                    const rect = container.getBoundingClientRect();
+                    const x = (e.clientX - rect.left) / width - 0.5;
+                    const y = (e.clientY - rect.top) / height - 0.5;
+                    
+                    // Only tilt if near the container
+                    if (Math.abs(x) < 2 && Math.abs(y) < 2) {
+                        targetRotationY = x * 0.3;
+                        targetRotationX = y * 0.3;
+                    } else {
+                        targetRotationX *= 0.95;
+                        targetRotationY *= 0.95;
+                    }
+                });
+
+                function animate() {
+                    requestAnimationFrame(animate);
+                    mesh.rotation.x += (targetRotationX - mesh.rotation.x) * 0.1;
+                    mesh.rotation.y += (targetRotationY - mesh.rotation.y) * 0.1;
+                    renderer.render(scene, camera);
+                }
+                animate();
+            }, undefined, (err) => {
+                console.warn("Portrait Load Fallback:", err);
+                const fb = container.querySelector('.portrait-fallback');
+                if(fb) fb.style.opacity = '1';
+            });
+
+        } catch(e) { console.error("Portrait 3D Init Error:", e); }
+    }
+
     initThreeGlobalBackground();
+    initPortrait3D();
 
     function initHeroAnimations() {
         if (typeof gsap === 'undefined') return;
