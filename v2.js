@@ -1,17 +1,23 @@
-document.addEventListener('DOMContentLoaded', () => {
+const init = () => {
+    console.log("Diamond Tier: JavaScript Initializing...");
+
+    // Register Plugins
+    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+        gsap.registerPlugin(ScrollTrigger);
+    }
 
     // ==========================================
     // 2. SCROLL PROGRESS
     // ==========================================
     const scrollProgress = document.getElementById('v2-scroll-progress');
-    window.addEventListener('scroll', () => {
-        const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-        const scrolled = (winScroll / height) * 100;
-        if (scrollProgress) {
+    if (scrollProgress) {
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
             scrollProgress.style.width = scrolled + "%";
-        }
-    });
+        });
+    }
 
     // ==========================================
     // 3. MAGNETIC BUTTONS (ENHANCED)
@@ -52,43 +58,43 @@ document.addEventListener('DOMContentLoaded', () => {
     const progress = document.querySelector('.loader-progress');
     const progressText = document.querySelector('.loader-percent');
     
-    // Initial State for Preloader
-    if (typeof gsap !== 'undefined') {
-        gsap.set('.v2-preloader-logo', { y: 20, opacity: 0 });
-        gsap.set('.v2-preloader-student-tag', { opacity: 0, y: 10 });
-        
-        const mainTl = gsap.timeline();
-        mainTl.to('.v2-preloader-logo', { y: 0, opacity: 1, duration: 1, ease: 'power3.out', delay: 0.2 })
-              .to('.v2-preloader-student-tag', { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out' }, "-=0.5");
-              
-        gsap.to('.v2-preloader-glow', { opacity: 1, duration: 2, repeat: -1, yoyo: true });
-    }
-
-    const preloaderStatus = document.querySelector('.v2-preloader-status');
-    const statuses = [
-        "Initialising System",
-        "Loading Assets",
-        "Checking Biometrics",
-        "Accessing Diamond Core",
-        "Ahmed Raza: UG SE"
-    ];
-
-    let loadProgress = 0;
-    const interval = setInterval(() => {
-        loadProgress += Math.random() * 15;
-        
-        // Update status text based on progress
-        const statusIdx = Math.min(Math.floor((loadProgress / 100) * statuses.length), statuses.length - 1);
-        if(preloaderStatus) preloaderStatus.textContent = statuses[statusIdx];
-
-        if (loadProgress >= 100) {
-            loadProgress = 100;
-            clearInterval(interval);
-            setTimeout(hidePreloader, 500);
+    if (preloader) {
+        if (typeof gsap !== 'undefined') {
+            gsap.set('.v2-preloader-logo', { y: 20, opacity: 0 });
+            gsap.set('.v2-preloader-student-tag', { opacity: 0, y: 10 });
+            
+            const mainTl = gsap.timeline();
+            mainTl.to('.v2-preloader-logo', { y: 0, opacity: 1, duration: 1, ease: 'power3.out', delay: 0.2 })
+                  .to('.v2-preloader-student-tag', { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out' }, "-=0.5");
+                  
+            gsap.to('.v2-preloader-glow', { opacity: 1, duration: 2, repeat: -1, yoyo: true });
         }
-        if(progress) progress.style.width = `${loadProgress}%`;
-        if(progressText) progressText.textContent = `${Math.floor(loadProgress)}%`;
-    }, 150);
+
+        const preloaderStatus = document.querySelector('.v2-preloader-status');
+        const statuses = [
+            "Initialising System",
+            "Loading Assets",
+            "Checking Biometrics",
+            "Accessing Diamond Core",
+            "Ahmed Raza: UG SE"
+        ];
+
+        let loadProgress = 0;
+        const interval = setInterval(() => {
+            loadProgress += Math.random() * 15;
+            
+            const statusIdx = Math.min(Math.floor((loadProgress / 100) * statuses.length), statuses.length - 1);
+            if(preloaderStatus) preloaderStatus.textContent = statuses[statusIdx];
+
+            if (loadProgress >= 100) {
+                loadProgress = 100;
+                clearInterval(interval);
+                setTimeout(hidePreloader, 500);
+            }
+            if(progress) progress.style.width = `${loadProgress}%`;
+            if(progressText) progressText.textContent = `${Math.floor(loadProgress)}%`;
+        }, 150);
+    }
 
     function hidePreloader() {
         if (!preloader) return;
@@ -100,11 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (typeof ScrollTrigger !== 'undefined') {
                         ScrollTrigger.refresh();
                     }
-                    try {
-                        initHeroAnimations();
-                    } catch (e) {
-                        console.error('Hero animations failed:', e);
-                    }
+                    initHeroAnimations();
                 }
             });
 
@@ -169,7 +171,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
             camera.position.z = 6;
 
-            // Animation Loop with Visibility Check
             let isVisible = true;
             const observer = new IntersectionObserver(([entry]) => {
                 isVisible = entry.isIntersecting;
@@ -195,96 +196,33 @@ document.addEventListener('DOMContentLoaded', () => {
                 renderer.setSize(window.innerWidth, window.innerHeight);
             });
 
-            // Scroll Parallax
             window.addEventListener('scroll', () => {
                 const scrollY = window.scrollY;
                 camera.position.y = -scrollY * 0.002;
             });
 
         } catch (e) {
-            console.error('Three.js initialization failed:', e);
+            console.error('Three.js Error:', e);
         }
     }
-
     initThreeHero();
 
     // ==========================================
     // 6. GSAP REVEALS (SMART)
     // ==========================================
-    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
-        gsap.registerPlugin(ScrollTrigger);
-    }
-
     function initHeroAnimations() {
         if (typeof gsap === 'undefined') return;
-
-        // Heading Animation
-        gsap.from('.v2-hero-title span span', {
-            y: 200,
-            opacity: 0,
-            duration: 1.5,
-            stagger: 0.2,
-            ease: 'power4.out'
-        });
-
-        gsap.from('.v2-hero-subtitle', {
-            opacity: 0,
-            y: 30,
-            duration: 1.2,
-            delay: 1,
-            ease: 'power3.out'
-        });
-
-        gsap.from('.v2-hero-cta', {
-            opacity: 0,
-            y: 30,
-            duration: 1,
-            delay: 1.4,
-            ease: 'power3.out'
-        });
-    }
-
-    // Filter Logic
-    const filterBtns = document.querySelectorAll('.v2-filter-btn');
-    const projectCards = document.querySelectorAll('.v2-project-card');
-
-    filterBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            const filter = btn.getAttribute('data-filter');
-            
-            filterBtns.forEach(b => {
-                b.classList.remove('active', 'bg-primary', 'text-white');
-                b.classList.add('opacity-50');
+        try {
+            gsap.from('.v2-hero-title span span', {
+                y: 200, opacity: 0, duration: 1.5, stagger: 0.2, ease: 'power4.out'
             });
-            btn.classList.add('active', 'bg-primary', 'text-white');
-            btn.classList.remove('opacity-50');
-
-            if (typeof gsap !== 'undefined') {
-                projectCards.forEach(card => {
-                    const category = card.getAttribute('data-category');
-                    if (filter === 'all' || category === filter) {
-                        card.style.display = 'block';
-                        gsap.to(card, {
-                            opacity: 1,
-                            scale: 1,
-                            duration: 0.5,
-                            ease: 'power2.out'
-                        });
-                    } else {
-                        gsap.to(card, {
-                            opacity: 0,
-                            scale: 0.8,
-                            duration: 0.5,
-                            ease: 'power2.in',
-                            onComplete: () => {
-                                card.style.display = 'none';
-                            }
-                        });
-                    }
-                });
-            }
-        });
-    });
+            gsap.from('.v2-hero-subtitle, .v2-hero-cta', {
+                opacity: 0, y: 30, duration: 1.2, stagger: 0.2, delay: 1, ease: 'power3.out'
+            });
+        } catch (e) {
+            console.error("Hero Anim Error:", e);
+        }
+    }
 
     // Reveal Logic (Refined)
     if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
@@ -303,172 +241,123 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // ==========================================
-    // 7. PHYSICS SKILLS CLOUD
-    // ==========================================
+    // Physics Skills
     function initPhysicsSkills() {
-        const container = document.getElementById('skills-container');
-        if (!container || typeof Matter === 'undefined') return;
+        try {
+            const container = document.getElementById('skills-container');
+            if (!container || typeof Matter === 'undefined') return;
 
-        const { Engine, Render, Runner, World, Bodies, MouseConstraint, Mouse, Composite } = Matter;
-
-        // Create engine
-        const engine = Engine.create();
-        engine.world.gravity.y = 0; // Microgravity for floating effect
-        
-        const width = container.offsetWidth;
-        const height = container.offsetHeight;
-
-        // --- BACKGROUND PARTICLES (OPTIMIZED) ---
-        const bgCanvas = document.getElementById('skills-canvas-bg');
-        const ctx = bgCanvas.getContext('2d');
-        bgCanvas.width = width;
-        bgCanvas.height = height;
-
-        let particles = [];
-        for(let i=0; i<30; i++) {
-            particles.push({
-                x: Math.random() * width,
-                y: Math.random() * height,
-                size: Math.random() * 2 + 0.5,
-                speedX: Math.random() * 0.3 - 0.15,
-                speedY: Math.random() * 0.3 - 0.15
-            });
-        }
-
-        let isSkillsVisible = false;
-        const skillsObserver = new IntersectionObserver(([entry]) => {
-            isSkillsVisible = entry.isIntersecting;
-        }, { threshold: 0.1 });
-        skillsObserver.observe(container);
-
-        function drawParticles() {
-            if (!isSkillsVisible) {
-                requestAnimationFrame(drawParticles);
-                return;
-            }
-            ctx.clearRect(0, 0, width, height);
-            ctx.fillStyle = 'rgba(99, 102, 241, 0.15)';
-            ctx.beginPath(); // Start a single path for better perf
-            particles.forEach(p => {
-                p.x += p.speedX;
-                p.y += p.speedY;
-                if(p.x < 0) p.x = width;
-                if(p.x > width) p.x = 0;
-                if(p.y < 0) p.y = height;
-                if(p.y > height) p.y = 0;
-                ctx.moveTo(p.x, p.y);
-                ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-            });
-            ctx.fill();
-            requestAnimationFrame(drawParticles);
-        }
-        drawParticles();
-
-        // Define Skills Data
-        const skillsData = [
-            { name: 'HTML', icon: 'fab fa-html5', color: '#f06529', glow: 'rgba(240, 101, 41, 0.5)', progress: '95%' },
-            { name: 'CSS', icon: 'fab fa-css3-alt', color: '#2965f1', glow: 'rgba(41, 101, 241, 0.5)', progress: '90%' },
-            { name: 'JS', icon: 'fab fa-js', color: '#f0db4f', glow: 'rgba(240, 219, 79, 0.5)', progress: '85%' },
-            { name: 'PHP', icon: 'fab fa-php', color: '#8993be', glow: 'rgba(137, 147, 190, 0.5)', progress: '88%' },
-            { name: 'Laravel', icon: 'fab fa-laravel', color: '#ff2d20', glow: 'rgba(255, 45, 32, 0.5)', progress: '80%' },
-            { name: 'MySQL', icon: 'fas fa-database', color: '#00758f', glow: 'rgba(0, 117, 143, 0.5)', progress: '82%' },
-            { name: 'Git', icon: 'fab fa-git-alt', color: '#f1502f', glow: 'rgba(241, 80, 47, 0.5)', progress: '78%' },
-            { name: 'Python', icon: 'fab fa-python', color: '#3776ab', glow: 'rgba(55, 118, 171, 0.5)', progress: '92%' },
-            { name: 'AI/ML', icon: 'fas fa-brain', color: '#00ffff', glow: 'rgba(0, 255, 255, 0.5)', progress: '86%' },
-            { name: 'Data Mining', icon: 'fas fa-magnifying-glass-chart', color: '#10b981', glow: 'rgba(16, 185, 129, 0.5)', progress: '83%' },
-            { name: 'Cyber Sec', icon: 'fas fa-user-shield', color: '#ef4444', glow: 'rgba(239, 68, 68, 0.5)', progress: '78%' },
-            { name: 'Crypto', icon: 'fas fa-key', color: '#a855f7', glow: 'rgba(168, 85, 247, 0.5)', progress: '80%' }
-        ];
-
-        // Create Walls
-        const wallThickness = 100;
-        const walls = [
-            Bodies.rectangle(width/2, -wallThickness/2, width, wallThickness, { isStatic: true }), // Top
-            Bodies.rectangle(width/2, height + wallThickness/2, width, wallThickness, { isStatic: true }), // Bottom
-            Bodies.rectangle(-wallThickness/2, height/2, wallThickness, height, { isStatic: true }), // Left
-            Bodies.rectangle(width + wallThickness/2, height/2, wallThickness, height, { isStatic: true }) // Right
-        ];
-        World.add(engine.world, walls);
-
-        // Create Skill Balls
-        const balls = [];
-        const ballSize = 110;
-
-        skillsData.forEach((skill, i) => {
-            const x = Math.random() * (width - ballSize) + ballSize/2;
-            const y = Math.random() * (height - ballSize) + ballSize/2;
+            const { Engine, Render, Runner, World, Bodies, MouseConstraint, Mouse, Composite } = Matter;
+            const engine = Engine.create();
+            engine.world.gravity.y = 0;
             
-            const ball = Bodies.circle(x, y, ballSize/2, {
-                restitution: 0.8, // Bounciness
-                friction: 0.005,
-                frictionAir: 0.012,
-                render: { fillStyle: 'transparent' }
-            });
+            const width = container.offsetWidth;
+            const height = container.offsetHeight;
 
-            // Add HTML element for the ball
-            const el = document.createElement('div');
-            el.className = 'skill-ball';
-            el.style.setProperty('--skill-color', skill.color);
-            el.style.setProperty('--glow-color', skill.glow);
-            el.innerHTML = `
-                <span class="skill-progress-tag">${skill.progress}</span>
-                <i class="${skill.icon}"></i>
-                <div class="skill-tooltip">${skill.name}</div>
-            `;
-            container.appendChild(el);
+            const bgCanvas = document.getElementById('skills-canvas-bg');
+            if (bgCanvas) {
+                const ctx = bgCanvas.getContext('2d');
+                bgCanvas.width = width;
+                bgCanvas.height = height;
 
-            ball.element = el;
-            balls.push(ball);
-        });
-
-        World.add(engine.world, balls);
-
-        // Mouse Interactivity
-        const mouse = Mouse.create(container);
-        const mouseConstraint = MouseConstraint.create(engine, {
-            mouse: mouse,
-            constraint: {
-                stiffness: 0.2,
-                render: { visible: false }
-            }
-        });
-        World.add(engine.world, mouseConstraint);
-
-        // Synchronization Loop
-        (function update() {
-            balls.forEach(ball => {
-                const { x, y } = ball.position;
-                const { angle } = ball;
-                ball.element.style.transform = `translate(${x - ballSize/2}px, ${y - ballSize/2}px) rotate(${angle}rad)`;
-                
-                // Keep them moving slightly
-                if (Math.abs(ball.velocity.x) < 0.1 && Math.abs(ball.velocity.y) < 0.1) {
-                    Matter.Body.applyForce(ball, ball.position, {
-                        x: (Math.random() - 0.5) * 0.002,
-                        y: (Math.random() - 0.5) * 0.002
+                let particles = [];
+                for(let i=0; i<30; i++) {
+                    particles.push({
+                        x: Math.random() * width,
+                        y: Math.random() * height,
+                        size: Math.random() * 2 + 0.5,
+                        speedX: Math.random() * 0.3 - 0.15,
+                        speedY: Math.random() * 0.3 - 0.15
                     });
                 }
+
+                let isSkillsVisible = false;
+                const skillsObserver = new IntersectionObserver(([entry]) => {
+                    isSkillsVisible = entry.isIntersecting;
+                }, { threshold: 0.1 });
+                skillsObserver.observe(container);
+
+                function drawParticles() {
+                    if (!isSkillsVisible) { requestAnimationFrame(drawParticles); return; }
+                    ctx.clearRect(0, 0, width, height);
+                    ctx.fillStyle = 'rgba(99, 102, 241, 0.15)';
+                    ctx.beginPath();
+                    particles.forEach(p => {
+                        p.x += p.speedX; p.y += p.speedY;
+                        if(p.x < 0) p.x = width; if(p.x > width) p.x = 0;
+                        if(p.y < 0) p.y = height; if(p.y > height) p.y = 0;
+                        ctx.moveTo(p.x, p.y); ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                    });
+                    ctx.fill();
+                    requestAnimationFrame(drawParticles);
+                }
+                drawParticles();
+            }
+
+            const skillsData = [
+                { name: 'HTML', icon: 'fab fa-html5', color: '#f06529', glow: 'rgba(240, 101, 41, 0.5)', progress: '95%' },
+                { name: 'CSS', icon: 'fab fa-css3-alt', color: '#2965f1', glow: 'rgba(41, 101, 241, 0.5)', progress: '90%' },
+                { name: 'JS', icon: 'fab fa-js', color: '#f0db4f', glow: 'rgba(240, 219, 79, 0.5)', progress: '85%' },
+                { name: 'PHP', icon: 'fab fa-php', color: '#8993be', glow: 'rgba(137, 147, 190, 0.5)', progress: '88%' },
+                { name: 'Laravel', icon: 'fab fa-laravel', color: '#ff2d20', glow: 'rgba(255, 45, 32, 0.5)', progress: '80%' },
+                { name: 'MySQL', icon: 'fas fa-database', color: '#00758f', glow: 'rgba(0, 117, 143, 0.5)', progress: '82%' },
+                { name: 'Git', icon: 'fab fa-git-alt', color: '#f1502f', glow: 'rgba(241, 80, 47, 0.5)', progress: '78%' },
+                { name: 'Python', icon: 'fab fa-python', color: '#3776ab', glow: 'rgba(55, 118, 171, 0.5)', progress: '92%' },
+                { name: 'AI/ML', icon: 'fas fa-brain', color: '#00ffff', glow: 'rgba(0, 255, 255, 0.5)', progress: '86%' }
+            ];
+
+            const wallThickness = 100;
+            const walls = [
+                Bodies.rectangle(width/2, -wallThickness/2, width, wallThickness, { isStatic: true }),
+                Bodies.rectangle(width/2, height + wallThickness/2, width, wallThickness, { isStatic: true }),
+                Bodies.rectangle(-wallThickness/2, height/2, wallThickness, height, { isStatic: true }),
+                Bodies.rectangle(width + wallThickness/2, height/2, wallThickness, height, { isStatic: true })
+            ];
+            World.add(engine.world, walls);
+
+            const balls = [];
+            const ballSize = 110;
+
+            skillsData.forEach((skill, i) => {
+                const ball = Bodies.circle(Math.random()*width, Math.random()*height, ballSize/2, {
+                    restitution: 0.8, friction: 0.005, frictionAir: 0.012, render: { fillStyle: 'transparent' }
+                });
+                const el = document.createElement('div');
+                el.className = 'skill-ball';
+                el.style.setProperty('--skill-color', skill.color);
+                el.style.setProperty('--glow-color', skill.glow);
+                el.innerHTML = `<span class="skill-progress-tag">${skill.progress}</span><i class="${skill.icon}"></i><div class="skill-tooltip">${skill.name}</div>`;
+                container.appendChild(el);
+                ball.element = el;
+                balls.push(ball);
             });
 
-            Engine.update(engine);
-            requestAnimationFrame(update);
-        })();
+            World.add(engine.world, balls);
+            const mouseConstraint = MouseConstraint.create(engine, {
+                mouse: Mouse.create(container),
+                constraint: { stiffness: 0.2, render: { visible: false } }
+            });
+            World.add(engine.world, mouseConstraint);
 
-        // Resize Handling
-        window.addEventListener('resize', () => {
-            const newWidth = container.offsetWidth;
-            const newHeight = container.offsetHeight;
-            bgCanvas.width = newWidth;
-            bgCanvas.height = newHeight;
-            
-            // Update boundaries
-            Matter.Body.setPosition(walls[1], { x: newWidth/2, y: newHeight + wallThickness/2 });
-            Matter.Body.setPosition(walls[3], { x: newWidth + wallThickness/2, y: newHeight/2 });
-        });
+            (function update() {
+                balls.forEach(ball => {
+                    const { x, y } = ball.position;
+                    const { angle } = ball;
+                    ball.element.style.transform = `translate(${x - ballSize/2}px, ${y - ballSize/2}px) rotate(${angle}rad)`;
+                });
+                Engine.update(engine);
+                requestAnimationFrame(update);
+            })();
+
+        } catch (e) {
+            console.error('Physics Error:', e);
+        }
     }
-
-    // Call it after general reveals or on load
     setTimeout(initPhysicsSkills, 2000);
-} ) ;  
- 
+};
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+} else {
+    init();
+}
