@@ -1,5 +1,6 @@
 const init = () => {
-    console.log("Diamond Tier: JavaScript Initializing...");
+    try {
+        console.log("Diamond Tier: JavaScript Initializing...");
 
     if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
         gsap.registerPlugin(ScrollTrigger);
@@ -252,8 +253,8 @@ const init = () => {
         }
     }
 
-    initThreeGlobalBackground();
-    initPortrait3D();
+    try { initThreeGlobalBackground(); } catch(e) { console.error("BG Fail:", e); }
+    try { initPortrait3D(); } catch(e) { console.error("Portrait Fail:", e); }
 
     function initHeroAnimations() {
         if (typeof gsap === 'undefined') return;
