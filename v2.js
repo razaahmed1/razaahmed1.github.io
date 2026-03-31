@@ -470,4 +470,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Call it after general reveals or on load
     setTimeout(initPhysicsSkills, 2000);
-});
+} ) ;  
+ 
