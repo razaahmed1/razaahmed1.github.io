@@ -97,6 +97,9 @@ document.addEventListener('DOMContentLoaded', () => {
             const tl = gsap.timeline({
                 onComplete: () => {
                     preloader.style.display = 'none';
+                    if (typeof ScrollTrigger !== 'undefined') {
+                        ScrollTrigger.refresh();
+                    }
                     try {
                         initHeroAnimations();
                     } catch (e) {
