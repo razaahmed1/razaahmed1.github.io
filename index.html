@@ -391,88 +391,105 @@
             pointer-events: none;
         }
 
-        .vip-form-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 2rem;
-        }
-
-        .vip-input-group.full-width {
-            grid-column: span 2;
+        .vip-form-card {
+            background: #151c27;
+            border-radius: 12px;
+            padding: 3rem;
+            box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.4);
         }
 
         .vip-input-group label {
             display: block;
-            font-size: 11px;
+            font-size: 10px;
             font-weight: 800;
             text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: white;
-            margin-bottom: 0.75rem;
+            letter-spacing: 0.15em;
+            color: #475569;
+            margin-bottom: 1rem;
         }
 
         .vip-input {
             width: 100%;
-            background: rgba(30, 41, 59, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 4px; /* Matches reference image sharp edges preference */
+            background: #111821;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
             padding: 1.25rem;
             color: white;
-            font-size: 14px;
+            font-size: 13px;
+            box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.3);
             transition: all 0.3s ease;
         }
 
-        .vip-input::placeholder {
-            color: rgba(255, 255, 255, 0.3);
-        }
-
         .vip-input:focus {
-            background: rgba(30, 41, 59, 0.4);
-            border-color: #6366f1;
+            box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.5), 0 0 20px rgba(99, 102, 241, 0.1);
+            border-color: rgba(99, 102, 241, 0.2);
             outline: none;
         }
 
         .vip-submit-btn {
             grid-column: span 2;
-            background: #6366f1;
-            color: white;
-            padding: 1.5rem;
-            border-radius: 1rem;
+            background: #1a222e;
+            color: #475569;
+            padding: 1.25rem;
+            border-radius: 8px;
             font-weight: 900;
             text-transform: uppercase;
-            letter-spacing: 0.15em;
-            font-size: 12px;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 10px 40px -10px rgba(99, 102, 241, 0.5);
-            margin-top: 1rem;
+            letter-spacing: 0.2em;
+            font-size: 11px;
+            transition: all 0.3s ease;
+            margin-top: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         .vip-submit-btn:hover {
-            transform: scale(1.02) translateY(-4px);
-            box-shadow: 0 20px 60px -10px rgba(99, 102, 241, 0.7);
-            background: #4f46e5;
+            background: #232d3d;
+            color: white;
+            transform: none;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
         }
 
-        /* Bouncing Social Links */
-        .social-link-vip {
+        /* Sidebar Squircle Socials */
+        .social-squircle-grid {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-squircle {
+            width: 3.5rem;
+            height: 3.5rem;
+            background: #111821;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            color: #475569;
+            box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        .social-link-vip:hover {
-            transform: scale(1.2) translateY(-10px) rotate(5deg);
-            filter: drop-shadow(0 15px 25px rgba(99, 102, 241, 0.5));
+        .social-squircle:hover {
+            color: white;
+            background: #1a222e;
+            transform: scale(1.15) translateY(-8px) rotate(5deg);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+            filter: drop-shadow(0 0 10px rgba(99, 102, 241, 0.3));
+        }
+
+        .sidebar-tag {
+            font-size: 11px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #475569;
+            margin-top: 2rem;
+            display: block;
         }
 
         @media (max-width: 768px) {
-            .vip-form-grid {
-                grid-template-columns: 1fr;
-            }
-            .vip-input-group.full-width {
-                grid-column: span 1;
-            }
-            .vip-submit-btn {
-                grid-column: span 1;
-            }
+            .vip-form-card { padding: 2rem; }
+            .vip-submit-btn { grid-column: span 1; }
         }
     </style>
     <script>
@@ -1005,12 +1022,36 @@
                         </div>
 
                         <div>
-                            <p class="text-[9px] uppercase tracking-[0.3em] text-slate-500 mb-6 font-black tracking-widest uppercase">Find Me On</p>
-                            <div class="flex flex-wrap gap-4">
-                                <a href="https://web.facebook.com/ahmed.raza.727771" target="_blank" class="vip-social-btn"><i class="fab fa-facebook-f font-black"></i></a>
-                                <a href="https://www.instagram.com/raza.__.ahmed?igsh=MWoxbzN3NmJnZnhwbw==" target="_blank" class="vip-social-btn"><i class="fab fa-instagram font-black"></i></a>
-                                <a href="https://linkedin.com/in/ahmed-raza-020b3b2b0" target="_blank" class="vip-social-btn"><i class="fab fa-linkedin-in font-black"></i></a>
-                                <a href="https://github.com/razaahmed1" target="_blank" class="vip-social-btn"><i class="fab fa-github font-black"></i></a>
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                    <!-- Left Sidebar (Identity Image) -->
+                    <div class="md:col-span-4 v2-reveal">
+                        <div class="vip-sidebar-card shadow-2xl shadow-indigo-500/5">
+                            <img src="C:\Users\ahmed\.gemini\antigravity\brain\e35d0d0e-b6e0-485d-87b6-b277f89bac94\contact_handshake_vip_1774944191681.png" alt="Collaborate" class="w-full rounded-3xl mb-8 border border-white/5 object-cover grayscale hover:grayscale-0 transition-all duration-700">
+                            <div class="space-y-4">
+                                <h3 class="text-4xl font-heading font-black italic">Ahmad Raza</h3>
+                                <div class="text-indigo-400 text-xs uppercase tracking-[0.3em] font-black">MERN Stack Developer</div>
+                                <p class="text-slate-400 text-sm leading-relaxed">
+                                    I'm a self-taught fullstack Nextjs developer passionate about turning ideas into real-world applications. Currently building full-stack projects and growing one line of code at a time.
+                                </p>
+                                
+                                <div class="pt-6 space-y-3">
+                                    <div class="flex items-center gap-4 text-slate-300 hover:text-white transition-colors duration-300">
+                                        <i class="fas fa-phone-alt text-indigo-500"></i>
+                                        <span class="text-xs font-black">+92 3106546012</span>
+                                    </div>
+                                    <div class="flex items-center gap-4 text-slate-300 hover:text-white transition-colors duration-300">
+                                        <i class="fas fa-envelope text-indigo-500"></i>
+                                        <span class="text-xs font-black">ahmadaraza01708@gmail.com</span>
+                                    </div>
+                                </div>
+
+                                <span class="sidebar-tag">Find Me On</span>
+                                <div class="social-squircle-grid">
+                                    <a href="https://web.facebook.com/ahmed.raza.727771" target="_blank" class="social-squircle"><i class="fab fa-facebook-f"></i></a>
+                                    <a href="https://www.instagram.com/raza.__.ahmed?igsh=MWoxbzN3NmJnZnhwbw==" target="_blank" class="social-squircle"><i class="fab fa-instagram"></i></a>
+                                    <a href="https://linkedin.com/in/razaahmed1" target="_blank" class="social-squircle"><i class="fab fa-linkedin-in"></i></a>
+                                    <a href="https://github.com/razaahmed1" target="_blank" class="social-squircle"><i class="fab fa-github"></i></a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -1018,8 +1059,7 @@
                     <!-- Contact Form Card -->
                     <div class="md:col-span-8 v2-reveal">
                         <div class="vip-form-card">
-                            <form action="#" class="vip-form-grid">
-                                <!-- Row 1 -->
+                            <form action="#" class="grid grid-cols-1 md:grid-cols-2 gap-8">
                                 <div class="vip-input-group">
                                     <label>Your Name</label>
                                     <input type="text" class="vip-input" placeholder="Enter your name">
@@ -1028,16 +1068,13 @@
                                     <label>Phone Number</label>
                                     <input type="text" class="vip-input" placeholder="Enter your phone">
                                 </div>
-                                <!-- Row 2 -->
-                                <div class="vip-input-group">
-                                    <label>Email Address</label>
+                                <div class="vip-input-group full-width">
+                                    <label>Email</label>
                                     <input type="email" class="vip-input" placeholder="Enter your email">
                                 </div>
-                                <div><!-- Empty slot for grid sync --></div>
-                                <!-- Row 3 -->
                                 <div class="vip-input-group full-width">
-                                    <label>Your Message</label>
-                                    <textarea class="vip-input" rows="6" placeholder="Tell me about your project..."></textarea>
+                                    <label>Message</label>
+                                    <textarea class="vip-input font-sans" rows="6" placeholder="Tell me about your project..."></textarea>
                                 </div>
                                 
                                 <button type="submit" class="vip-submit-btn">
@@ -1046,14 +1083,6 @@
                             </form>
                         </div>
                     </div>
-                </div>
-
-                <!-- VIP Social Links with Bouncy Hover -->
-                <div class="flex justify-center gap-8 mt-24 v2-reveal">
-                    <a href="https://github.com/razaahmed1" target="_blank" class="social-link-vip text-3xl text-white/40 hover:text-white"><i class="fab fa-github"></i></a>
-                    <a href="https://linkedin.com/in/razaahmed1" target="_blank" class="social-link-vip text-3xl text-white/40 hover:text-indigo-400"><i class="fab fa-linkedin"></i></a>
-                    <a href="https://web.facebook.com/ahmed.raza.727771" target="_blank" class="social-link-vip text-3xl text-white/40 hover:text-blue-500"><i class="fab fa-facebook"></i></a>
-                    <a href="https://www.instagram.com/raza.__.ahmed?igsh=MWoxbzN3NmJnZnhwbw==" target="_blank" class="social-link-vip text-3xl text-white/40 hover:text-pink-500"><i class="fab fa-instagram"></i></a>
                 </div>
             </div>
         </section>
