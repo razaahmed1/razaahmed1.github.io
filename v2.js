@@ -155,11 +155,19 @@ const init = () => {
     }
     function initPortrait3D() {
         const container = document.getElementById('portrait-3d-portal');
-        if (!container || typeof THREE === 'undefined') return;
+        const fallback = container ? container.querySelector('.portrait-fallback') : null;
+        
+        if (!container || typeof THREE === 'undefined') {
+            console.warn("Portrait Container or Three.js missing. Showing fallback.");
+            if(fallback) fallback.style.opacity = '1';
+            return;
+        }
 
         try {
-            const width = container.clientWidth;
-            const height = container.clientHeight;
+            const width = container.clientWidth || 400; // Default fallback width
+            const height = container.clientHeight || 400;
+            console.log("Initializing Portrait 3D:", { width, height });
+
             const scene = new THREE.Scene();
             const camera = new THREE.PerspectiveCamera(40, width / height, 0.1, 1000);
             camera.position.z = 2.5;
@@ -169,7 +177,7 @@ const init = () => {
             renderer.setPixelRatio(window.devicePixelRatio);
             container.appendChild(renderer.domElement);
 
-            // Chroma Key Shader
+            // Chroma Key Shader (Improved robust syntax)
             const vertexShader = `
                 varying vec2 vUv;
                 void main() {
@@ -183,63 +191,65 @@ const init = () => {
                 varying vec2 vUv;
                 void main() {
                     vec4 color = texture2D(map, vUv);
-                    // Blue range: B > R && B > G
+                    // Blue exclusion logic
                     float blueStrength = color.b - max(color.r, color.g);
                     float alpha = 1.0;
                     if(blueStrength > 0.05) {
-                        alpha = smoothstep(0.15, 0.05, blueStrength);
+                        alpha = clamp(1.0 - (blueStrength * 8.0), 0.0, 1.0);
                     }
                     gl_FragColor = vec4(color.rgb, alpha * color.a);
                 }
             `;
 
             const loader = new THREE.TextureLoader();
-            loader.load('ahmed.webp', (texture) => {
-                const material = new THREE.ShaderMaterial({
-                    uniforms: { map: { value: texture } },
-                    vertexShader,
-                    fragmentShader,
-                    transparent: true,
-                    side: THREE.DoubleSide
-                });
+            loader.load('ahmed.webp', 
+                (texture) => {
+                    console.log("Portrait Texture Loaded Successfully.");
+                    const material = new THREE.ShaderMaterial({
+                        uniforms: { map: { value: texture } },
+                        vertexShader,
+                        fragmentShader,
+                        transparent: true,
+                        side: THREE.BackSide
+                    });
 
-                const geometry = new THREE.PlaneGeometry(2, 2);
-                const mesh = new THREE.Mesh(geometry, material);
-                scene.add(mesh);
+                    // Use Sphere or Plane? Let's stick to Plane with high detail
+                    const geometry = new THREE.PlaneGeometry(2, 2);
+                    const mesh = new THREE.Mesh(geometry, material);
+                    scene.add(mesh);
 
-                // Mouse Parallax Logic
-                let targetRotationX = 0;
-                let targetRotationY = 0;
+                    let targetRotationX = 0;
+                    let targetRotationY = 0;
 
-                window.addEventListener('mousemove', (e) => {
-                    const rect = container.getBoundingClientRect();
-                    const x = (e.clientX - rect.left) / width - 0.5;
-                    const y = (e.clientY - rect.top) / height - 0.5;
-                    
-                    // Only tilt if near the container
-                    if (Math.abs(x) < 2 && Math.abs(y) < 2) {
-                        targetRotationY = x * 0.3;
-                        targetRotationX = y * 0.3;
-                    } else {
-                        targetRotationX *= 0.95;
-                        targetRotationY *= 0.95;
+                    window.addEventListener('mousemove', (e) => {
+                        const rect = container.getBoundingClientRect();
+                        const x = (e.clientX - rect.left) / width - 0.5;
+                        const y = (e.clientY - rect.top) / height - 0.5;
+                        if (Math.abs(x) < 2 && Math.abs(y) < 2) {
+                            targetRotationY = x * 0.4;
+                            targetRotationX = y * 0.4;
+                        }
+                    });
+
+                    function animate() {
+                        requestAnimationFrame(animate);
+                        mesh.rotation.x += (targetRotationX - mesh.rotation.x) * 0.1;
+                        mesh.rotation.y += (targetRotationY - mesh.rotation.y) * 0.1;
+                        renderer.render(scene, camera);
                     }
-                });
-
-                function animate() {
-                    requestAnimationFrame(animate);
-                    mesh.rotation.x += (targetRotationX - mesh.rotation.x) * 0.1;
-                    mesh.rotation.y += (targetRotationY - mesh.rotation.y) * 0.1;
-                    renderer.render(scene, camera);
+                    animate();
+                },
+                undefined,
+                (err) => {
+                    console.error("Texture Load Error:", err);
+                    if(fallback) fallback.style.opacity = '1';
                 }
-                animate();
-            }, undefined, (err) => {
-                console.warn("Portrait Load Fallback:", err);
-                const fb = container.querySelector('.portrait-fallback');
-                if(fb) fb.style.opacity = '1';
-            });
+            );
 
-        } catch(e) { console.error("Portrait 3D Init Error:", e); }
+        } catch(e) { 
+            console.error("Critical Portrait 3D Error:", e);
+            if(fallback) fallback.style.opacity = '1';
+        }
     }
 
     initThreeGlobalBackground();
