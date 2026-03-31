@@ -197,6 +197,7 @@ const init = () => {
             const fragmentShader = `
                 uniform sampler2D map;
                 varying vec2 vUv;
+                void main() {
                     // Simplified Shader for maximum reliability - chroma logic removed
                     vec4 color = texture2D(map, vUv);
                     gl_FragColor = vec4(color.rgb, color.a); 
