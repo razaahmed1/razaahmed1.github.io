@@ -391,11 +391,36 @@
             pointer-events: none;
         }
 
+        /* Professional Contact VIP Overhaul (Neural Glass) */
+        .vip-sidebar-card {
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 2rem;
+            padding: 2.5rem;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .vip-sidebar-card:hover {
+            border-color: rgba(99, 102, 241, 0.2);
+            box-shadow: 0 40px 100px -20px rgba(0, 0, 0, 0.5);
+        }
+
         .vip-form-card {
-            background: #151c27;
-            border-radius: 12px;
+            background: rgba(15, 23, 42, 0.4);
+            backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 2rem;
             padding: 3rem;
-            box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .vip-form-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.3), transparent);
         }
 
         .vip-input-group label {
@@ -403,49 +428,56 @@
             font-size: 10px;
             font-weight: 800;
             text-transform: uppercase;
-            letter-spacing: 0.15em;
-            color: #475569;
-            margin-bottom: 1rem;
+            letter-spacing: 0.2em;
+            color: #94a3b8;
+            margin-bottom: 0.75rem;
+            transition: color 0.3s ease;
+        }
+
+        .vip-input-group:focus-within label {
+            color: #6366f1;
         }
 
         .vip-input {
             width: 100%;
-            background: #111821;
-            border: 1px solid rgba(255, 255, 255, 0.03);
-            border-radius: 8px;
-            padding: 1.25rem;
+            background: rgba(2, 6, 23, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 1rem;
+            padding: 1.25rem 1.5rem;
             color: white;
-            font-size: 13px;
-            box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.3);
-            transition: all 0.3s ease;
+            font-size: 14px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .vip-input:focus {
-            box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.5), 0 0 20px rgba(99, 102, 241, 0.1);
-            border-color: rgba(99, 102, 241, 0.2);
+            background: rgba(2, 6, 23, 0.6);
+            border-color: rgba(99, 102, 241, 0.4);
+            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
             outline: none;
         }
 
         .vip-submit-btn {
             grid-column: span 2;
-            background: #1a222e;
-            color: #475569;
+            background: linear-gradient(135deg, #6366f1, #4f46e5);
+            color: white;
             padding: 1.25rem;
-            border-radius: 8px;
-            font-weight: 900;
+            border-radius: 1rem;
+            font-weight: 800;
             text-transform: uppercase;
             letter-spacing: 0.2em;
-            font-size: 11px;
-            transition: all 0.3s ease;
+            font-size: 12px;
             margin-top: 1.5rem;
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            border: none;
+            cursor: pointer;
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .vip-submit-btn:hover {
-            background: #232d3d;
-            color: white;
-            transform: none;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 20px 40px -10px rgba(79, 70, 229, 0.5);
+            transform: translateY(-2px);
         }
 
         /* Sidebar Squircle Socials */
@@ -1018,7 +1050,6 @@
                                 </div>
 
                                 <div class="pt-8">
-                                    <span class="sidebar-tag mb-4">Find Me On</span>
                                     <div class="social-squircle-grid">
                                         <a href="https://web.facebook.com/ahmed.raza.727771" target="_blank" class="social-squircle"><i class="fab fa-facebook-f text-sm"></i></a>
                                         <a href="https://www.instagram.com/raza.__.ahmed?igsh=MWoxbzN3NmJnZnhwbw==" target="_blank" class="social-squircle"><i class="fab fa-instagram text-sm"></i></a>
