@@ -316,11 +316,11 @@ const init = () => {
             World.add(engine.world, walls);
 
             const balls = [];
-            const ballSize = 85;
+            const ballSize = 100;
 
             skillsData.forEach((skill, i) => {
                 const ball = Bodies.circle(Math.random()*width, Math.random()*height, ballSize/2, {
-                    restitution: 0.9, friction: 0.002, frictionAir: 0.015, render: { fillStyle: 'transparent' }
+                    restitution: 0.8, friction: 0.005, frictionAir: 0.015, render: { fillStyle: 'transparent' }
                 });
                 const el = document.createElement('div');
                 el.className = 'skill-ball';
@@ -335,6 +335,17 @@ const init = () => {
                 container.appendChild(el);
                 ball.element = el;
                 balls.push(ball);
+            });
+
+            Events.on(engine, 'afterUpdate', () => {
+                balls.forEach(ball => {
+                    const { position: pos } = ball;
+                    const el = ball.element;
+                    if (el) {
+                        // NO ROTATION applied here to keep icons upright
+                        el.style.transform = `translate(${pos.x - ballSize/2}px, ${pos.y - ballSize/2}px)`;
+                    }
+                });
             });
 
             World.add(engine.world, balls);

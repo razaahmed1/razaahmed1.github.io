@@ -197,68 +197,25 @@
         /* Physics Skills Styles */
         #skills-container {
             width: 100%;
-            max-width: 600px;
-            height: 450px;
+            max-width: 900px;
+            height: 500px;
             position: relative;
-            overflow: visible;
             margin: 0 auto;
-            perspective: 2000px;
-        }
-
-        .skills-glass-box {
-            position: absolute;
-            inset: 0;
-            transform-style: preserve-3d;
-            transform: rotateX(10deg) rotateY(0deg);
-            background: rgba(255, 255, 255, 0.02);
-            border-radius: 2rem;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            box-shadow: 
-                0 30px 100px rgba(0, 0, 0, 0.5),
-                inset 0 0 50px rgba(99, 102, 241, 0.1);
-        }
-
-        /* 3D Sides */
-        .skills-glass-box::before, .skills-glass-box::after {
-            content: '';
-            position: absolute;
-            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.05), transparent);
-            pointer-events: none;
-        }
-
-        /* Left Side */
-        .skills-glass-box::before {
-            width: 80px;
-            height: 100%;
-            left: -40px;
-            top: 0;
-            transform: rotateY(90deg);
-            border-left: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        /* Bottom Side (Floor) */
-        .skills-glass-box::after {
-            width: 100%;
-            height: 80px;
-            bottom: -40px;
-            left: 0;
-            transform: rotateX(90deg);
-            background: radial-gradient(circle at 50% 0%, rgba(99, 102, 241, 0.2), transparent 70%);
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            overflow: visible;
         }
 
         #skills-canvas-bg {
             position: absolute;
             inset: 0;
             pointer-events: none;
-            opacity: 0.2;
-            border-radius: inherit;
+            opacity: 0.15;
+            filter: blur(20px);
         }
 
         .skill-ball {
             position: absolute;
-            width: 85px;
-            height: 85px;
+            width: 100px;
+            height: 100px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -266,31 +223,34 @@
             cursor: grab;
             user-select: none;
             touch-action: none;
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.02));
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
             border: 1px solid rgba(255, 255, 255, 0.1);
             box-shadow: 
-                0 10px 20px rgba(0, 0, 0, 0.4),
-                inset 0 0 15px rgba(255, 255, 255, 0.05);
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+                0 10px 30px -10px rgba(0, 0, 0, 0.3),
+                inset 0 0 20px rgba(255, 255, 255, 0.05);
+            transition: all 0.4s ease;
             will-change: transform;
             z-index: 10;
         }
 
-        /* 3D Reflection/Shadow on floor */
-        .skill-ball::after {
-            content: '';
+        .skill-inner-glow {
             position: absolute;
-            bottom: -30px;
-            left: 50%;
-            width: 60%;
-            height: 10px;
-            background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.3), transparent 70%);
-            transform: translateX(-50%) rotateX(80deg);
-            filter: blur(4px);
+            inset: 2px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.15), transparent 60%);
             pointer-events: none;
-            opacity: 0.5;
+        }
+
+        .skill-ball:hover {
+            border-color: var(--skill-color);
+            background: rgba(255, 255, 255, 0.07);
+            box-shadow: 
+                0 0 40px -10px var(--glow-color),
+                inset 0 0 20px -5px var(--glow-color);
+            transform: scale(1.05) !important;
+            z-index: 100;
         }
 
         .skill-ball i {
@@ -781,20 +741,17 @@
             </div>
         </section>
 
-        <!-- Skills Section (3D Cube) -->
-        <section id="skills" class="relative py-24 md:py-48 px-4 z-10 overflow-hidden bg-transparent">
+        <!-- Skills Section (Minimalist) -->
+        <section id="skills" class="relative py-24 md:py-32 px-4 z-10 bg-transparent">
             <div class="container mx-auto">
-                <div class="flex flex-col items-center mb-24 v2-reveal">
-                    <span class="text-[10px] uppercase tracking-[0.5em] font-black text-indigo-500 mb-4 font-black tracking-widest uppercase text-center">Technical Aura</span>
-                    <h2 class="text-6xl md:text-9xl font-heading font-black text-center italic tracking-tighter">
-                        My <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 via-sky-400 to-emerald-400 font-black">Skills</span><span class="text-indigo-500 font-black">.</span>
-                    </h2>
+                <div class="flex flex-col items-center mb-16 v2-reveal">
+                    <span class="text-[10px] uppercase tracking-[0.5em] font-black text-indigo-500 mb-4 font-black tracking-widest uppercase">Expertise</span>
+                    <h2 class="text-5xl md:text-7xl font-heading font-black italic font-black text-center">My Skills<span class="text-primary font-black">.</span></h2>
                 </div>
 
                 <div id="skills-container" class="v2-reveal">
-                    <div class="skills-glass-box">
-                        <canvas id="skills-canvas-bg"></canvas>
-                    </div>
+                    <canvas id="skills-canvas-bg"></canvas>
+                    <!-- Skills injected by JS -->
                 </div>
             </div>
         </section>
