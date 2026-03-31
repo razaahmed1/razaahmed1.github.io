@@ -214,8 +214,8 @@
 
         .skill-ball {
             position: absolute;
-            width: 100px;
-            height: 100px;
+            width: 95px;
+            height: 95px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -232,32 +232,26 @@
                 inset 0 0 20px rgba(255, 255, 255, 0.03);
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             will-change: transform;
+            transform-style: preserve-3d;
             z-index: 10;
-        }
-
-        .skill-inner-glow {
-            position: absolute;
-            inset: 4px;
-            border-radius: 50%;
-            background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.1), transparent 70%);
-            pointer-events: none;
         }
 
         .skill-ball:hover {
             border-color: var(--skill-color);
             background: rgba(15, 23, 42, 0.4);
             box-shadow: 
-                0 0 40px -10px var(--glow-color),
-                inset 0 0 20px -5px var(--glow-color);
-            transform: scale(1.08) !important;
+                0 0 50px -10px var(--glow-color),
+                inset 0 0 25px -5px var(--glow-color);
+            transform: scale(1.1) translateZ(50px) !important;
             z-index: 100;
         }
 
         .skill-ball i {
-            font-size: 2.8rem;
+            font-size: 2.2rem;
             color: var(--skill-color);
             filter: drop-shadow(0 0 15px var(--glow-color));
             transition: transform 0.5s ease;
+            transform: translateZ(20px); /* Lift icon for 3D */
         }
 
         .skill-ball:hover i {
@@ -291,38 +285,16 @@
             transform: translateX(-50%) translateY(0);
         }
 
-        .skill-badge {
-            position: absolute;
-            bottom: 12px;
-            font-size: 8px;
-            font-weight: 900;
-            color: white;
-            background: var(--skill-color);
-            padding: 2px 6px;
-            border-radius: 20px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-            letter-spacing: 0.05em;
-            opacity: 0.8;
-            transform: translateY(5px);
-            transition: all 0.4s ease;
-        }
-
-        .skill-ball:hover .skill-badge {
-            opacity: 1;
-            transform: translateY(0);
-            box-shadow: 0 0 15px var(--glow-color);
-        }
-
         @media (max-width: 768px) {
             #skills-container {
                 height: 400px;
             }
             .skill-ball {
-                width: 70px;
-                height: 70px;
+                width: 75px;
+                height: 75px;
             }
             .skill-ball i {
-                font-size: 1.5rem;
+                font-size: 1.8rem;
             }
         }
     </style>

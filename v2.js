@@ -1,12 +1,10 @@
 const init = () => {
     console.log("Diamond Tier: JavaScript Initializing...");
 
-    // Register Plugins
     if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
         gsap.registerPlugin(ScrollTrigger);
     }
 
-    // Scroll Progress
     const scrollProgress = document.getElementById('v2-scroll-progress');
     if (scrollProgress) {
         window.addEventListener('scroll', () => {
@@ -17,32 +15,25 @@ const init = () => {
         });
     }
 
-    // Magnetic Elements
     const magneticElements = document.querySelectorAll('.v2-hero-cta a, .v2-filter-btn, .glass-card');
     magneticElements.forEach(btn => {
         btn.addEventListener('mousemove', (e) => {
             const rect = btn.getBoundingClientRect();
             const x = e.clientX - rect.left - rect.width / 2;
             const y = e.clientY - rect.top - rect.height / 2;
-            if (typeof gsap !== 'undefined') {
-                gsap.to(btn, { x: x * 0.2, y: y * 0.2, duration: 0.3, ease: 'power2.out' });
-            }
+            if (typeof gsap !== 'undefined') gsap.to(btn, { x: x * 0.2, y: y * 0.2, duration: 0.3, ease: 'power2.out' });
         });
         btn.addEventListener('mouseleave', () => {
-            if (typeof gsap !== 'undefined') {
-                gsap.to(btn, { x: 0, y: 0, duration: 0.5, ease: 'elastic.out(1, 0.3)' });
-            }
+            if (typeof gsap !== 'undefined') gsap.to(btn, { x: 0, y: 0, duration: 0.5, ease: 'elastic.out(1, 0.3)' });
         });
     });
 
-    // Preloader Logic
     const preloader = document.getElementById('v2-preloader');
     if (preloader) {
         const progress = document.querySelector('.loader-progress');
         const progressText = document.querySelector('.loader-percent');
         const preloaderStatus = document.querySelector('.v2-preloader-status');
         const statuses = ["Initialising System", "Loading Assets", "Searching for Diamonds", "Ahmed Raza: UG SE"];
-        
         let loadProgress = 0;
         const interval = setInterval(() => {
             loadProgress += Math.random() * 15;
@@ -50,10 +41,7 @@ const init = () => {
             if(preloaderStatus) preloaderStatus.textContent = statuses[statusIdx];
             if(progress) progress.style.width = `${loadProgress}%`;
             if(progressText) progressText.textContent = `${Math.floor(loadProgress)}%`;
-            if (loadProgress >= 100) {
-                clearInterval(interval);
-                setTimeout(hidePreloader, 500);
-            }
+            if (loadProgress >= 100) { clearInterval(interval); setTimeout(hidePreloader, 500); }
         }, 150);
     }
 
@@ -73,7 +61,6 @@ const init = () => {
         }
     }
 
-    // Three.js Hero Parallax
     function initThreeHero() {
         try {
             const container = document.getElementById('three-container');
@@ -111,7 +98,15 @@ const init = () => {
         gsap.from('.v2-hero-title span span', { y: 200, opacity: 0, duration: 1.5, stagger: 0.2, ease: 'power4.out' });
     }
 
-    // Physics Skills Section
+    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+        document.querySelectorAll('.v2-reveal').forEach(el => {
+            gsap.to(el, {
+                scrollTrigger: { trigger: el, start: 'top 90%', toggleActions: 'play none none none' },
+                opacity: 1, y: 0, duration: 1, ease: 'power2.out'
+            });
+        });
+    }
+
     function initPhysicsSkills() {
         const container = document.getElementById('skills-container');
         if (!container || typeof Matter === 'undefined') return;
@@ -132,18 +127,20 @@ const init = () => {
                 const height = container.offsetHeight;
 
                 const skillsData = [
-                    { name: 'HTML', icon: 'fab fa-html5', color: '#f06529', glow: 'rgba(240, 101, 41, 0.3)', progress: '95%' },
-                    { name: 'CSS', icon: 'fab fa-css3-alt', color: '#2965f1', glow: 'rgba(41, 101, 241, 0.3)', progress: '90%' },
-                    { name: 'JS', icon: 'fab fa-js', color: '#f0db4f', glow: 'rgba(240, 219, 79, 0.3)', progress: '85%' },
-                    { name: 'PHP', icon: 'fab fa-php', color: '#8993be', glow: 'rgba(137, 147, 190, 0.3)', progress: '88%' },
-                    { name: 'Laravel', icon: 'fab fa-laravel', color: '#ff2d20', glow: 'rgba(255, 45, 32, 0.3)', progress: '80%' },
-                    { name: 'MySQL', icon: 'fas fa-database', color: '#00758f', glow: 'rgba(0, 117, 143, 0.3)', progress: '82%' },
-                    { name: 'Git', icon: 'fab fa-git-alt', color: '#f1502f', glow: 'rgba(241, 80, 47, 0.3)', progress: '78%' },
-                    { name: 'Python', icon: 'fab fa-python', color: '#3776ab', glow: 'rgba(55, 118, 171, 0.3)', progress: '92%' },
-                    { name: 'AI', icon: 'fas fa-brain', color: '#00ffff', glow: 'rgba(0, 255, 255, 0.3)', progress: '86%' }
+                    { name: 'HTML', icon: 'fab fa-html5', color: '#f06529', glow: 'rgba(240, 101, 41, 0.2)' },
+                    { name: 'CSS', icon: 'fab fa-css3-alt', color: '#2965f1', glow: 'rgba(41, 101, 241, 0.2)' },
+                    { name: 'JS', icon: 'fab fa-js', color: '#f0db4f', glow: 'rgba(240, 219, 79, 0.2)' },
+                    { name: 'PHP', icon: 'fab fa-php', color: '#8993be', glow: 'rgba(137, 147, 190, 0.2)' },
+                    { name: 'Laravel', icon: 'fab fa-laravel', color: '#ff2d20', glow: 'rgba(255, 45, 32, 0.2)' },
+                    { name: 'MySQL', icon: 'fas fa-database', color: '#00758f', glow: 'rgba(0, 117, 143, 0.2)' },
+                    { name: 'Git', icon: 'fab fa-git-alt', color: '#f1502f', glow: 'rgba(241, 80, 47, 0.2)' },
+                    { name: 'Python', icon: 'fab fa-python', color: '#3776ab', glow: 'rgba(55, 118, 171, 0.2)' },
+                    { name: 'AI', icon: 'fas fa-brain', color: '#00ffff', glow: 'rgba(0, 255, 255, 0.2)' },
+                    { name: 'OS', icon: 'fas fa-laptop-code', color: '#526cf4', glow: 'rgba(82, 108, 244, 0.2)' },
+                    { name: 'Crypto', icon: 'fas fa-key', color: '#c0c0c0', glow: 'rgba(192, 192, 192, 0.2)' },
+                    { name: 'Security', icon: 'fas fa-shield-halved', color: '#00ff41', glow: 'rgba(0, 255, 65, 0.2)' }
                 ];
 
-                const wallThickness = 100;
                 const walls = [
                     Bodies.rectangle(width/2, -50, width, 100, { isStatic: true }),
                     Bodies.rectangle(width/2, height+50, width, 100, { isStatic: true }),
@@ -152,21 +149,16 @@ const init = () => {
                 ];
                 World.add(engine.world, walls);
 
-                const ballSize = 100;
+                const ballSize = 95;
                 const balls = skillsData.map(skill => {
                     const ball = Bodies.circle(Math.random()*width, Math.random()*height, ballSize/2, {
-                        restitution: 0.8, friction: 0.005, frictionAir: 0.015
+                        restitution: 0.9, friction: 0.005, frictionAir: 0.012
                     });
                     const el = document.createElement('div');
                     el.className = 'skill-ball';
                     el.style.setProperty('--skill-color', skill.color);
                     el.style.setProperty('--glow-color', skill.glow);
-                    el.innerHTML = `
-                        <div class="skill-inner-glow"></div>
-                        <i class="${skill.icon}"></i>
-                        <div class="skill-badge">${skill.progress}</div>
-                        <div class="skill-tooltip">${skill.name}</div>
-                    `;
+                    el.innerHTML = `<div class="skill-inner-glow"></div><i class="${skill.icon}"></i><div class="skill-tooltip">${skill.name}</div>`;
                     container.appendChild(el);
                     ball.element = el;
                     return ball;
@@ -176,7 +168,11 @@ const init = () => {
                 Events.on(engine, 'afterUpdate', () => {
                     balls.forEach(ball => {
                         const { x, y } = ball.position;
-                        ball.element.style.transform = `translate(${x - ballSize/2}px, ${y - ballSize/2}px)`;
+                        const v = ball.velocity;
+                        // 3D Tilt calculation based on velocity
+                        const tiltX = v.y * 3;
+                        const tiltY = -v.x * 3;
+                        ball.element.style.transform = `translate(${x - ballSize/2}px, ${y - ballSize/2}px) rotateX(${tiltX}deg) rotateY(${tiltY}deg)`;
                     });
                 });
 
