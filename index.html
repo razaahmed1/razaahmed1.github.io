@@ -500,6 +500,19 @@
                 if(p) p.classList.add('hide-preloader');
             }, 3000);
         });
+
+        // Refresh at Top Logic
+        if (history.scrollRestoration) {
+            history.scrollRestoration = 'manual';
+        }
+        window.addEventListener('beforeunload', () => {
+            window.scrollTo(0, 0);
+        });
+        window.addEventListener('pageshow', (event) => {
+            if (event.persisted) {
+                window.scrollTo(0, 0);
+            }
+        });
     </script>
 </head>
 
@@ -1031,14 +1044,15 @@
                                     <label>Phone Number</label>
                                     <input type="text" class="vip-input" placeholder="Enter your phone">
                                 </div>
-                                <!-- Row 2 (Balanced Grid from Image) -->
-                                <div class="vip-input-group">
+                                <!-- Row 2 (Full Width) -->
+                                <div class="vip-input-group full-width">
                                     <label>Email</label>
                                     <input type="email" class="vip-input" placeholder="Enter your email">
                                 </div>
-                                <div class="vip-input-group">
+                                <!-- Row 3 (Full Width) -->
+                                <div class="vip-input-group full-width">
                                     <label>Message</label>
-                                    <textarea class="vip-input font-sans text-xs" rows="3" placeholder="Tell me about your project..."></textarea>
+                                    <textarea class="vip-input font-sans" rows="6" placeholder="Tell me about your project..."></textarea>
                                 </div>
                                 
                                 <button type="submit" class="vip-submit-btn">
