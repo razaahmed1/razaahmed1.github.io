@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="js-enabled">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -105,11 +105,6 @@
             transform: none;
             will-change: transform, opacity;
         }
-        
-        .js-enabled .v2-reveal {
-            opacity: 0;
-            transform: translateY(2rem);
-        }
 
         .diamond-logo {
             font-weight: 900 !important;
@@ -139,7 +134,13 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            transition: opacity 1s ease;
+            transition: all 1s ease;
+        }
+
+        .preloader.hide-preloader {
+            opacity: 0 !important;
+            pointer-events: none !important;
+            visibility: hidden !important;
         }
 
         .loader-line {
@@ -322,14 +323,13 @@
         }
     </style>
     <script>
-        // Failsafe: Hide preloader if JS fails to initialize
-        setTimeout(() => {
-            const preloader = document.getElementById('v2-preloader');
-            if (preloader && preloader.style.display !== 'none') {
-                preloader.style.opacity = '0';
-                setTimeout(() => preloader.style.display = 'none', 1000);
-            }
-        }, 5000);
+        // Force-hide preloader after 3 seconds anyway
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const p = document.getElementById('v2-preloader');
+                if(p) p.classList.add('hide-preloader');
+            }, 3000);
+        });
     </script>
 </head>
 
