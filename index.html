@@ -458,26 +458,26 @@
 
         .vip-submit-btn {
             grid-column: span 2;
-            background: linear-gradient(135deg, #6366f1, #4f46e5);
+            background: #6366f1;
             color: white;
-            padding: 1.25rem;
+            padding: 1.5rem;
             border-radius: 1rem;
-            font-weight: 800;
+            font-weight: 900;
             text-transform: uppercase;
-            letter-spacing: 0.2em;
-            font-size: 12px;
-            margin-top: 1.5rem;
+            letter-spacing: 0.3em;
+            font-size: 14px;
+            margin-top: 2rem;
             border: none;
             cursor: pointer;
-            position: relative;
-            z-index: 1;
-            overflow: hidden;
+            width: 100%;
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 15px 30px -10px rgba(99, 102, 241, 0.5);
         }
 
         .vip-submit-btn:hover {
-            box-shadow: 0 20px 40px -10px rgba(79, 70, 229, 0.5);
-            transform: translateY(-2px);
+            background: #4f46e5;
+            box-shadow: 0 20px 40px -10px rgba(79, 70, 229, 0.6);
+            transform: translateY(-3px);
         }
 
         /* Sidebar Squircle Socials */
@@ -1060,7 +1060,6 @@
                             </div>
                         </div>
                     </div>
-                    </div>
 
                     <!-- Contact Form Card -->
                     <div class="md:col-span-8 v2-reveal">
@@ -1075,15 +1074,14 @@
                                     <label>Phone Number</label>
                                     <input type="text" class="vip-input" placeholder="Enter your phone">
                                 </div>
-                                <!-- Row 2 (Full Width) -->
-                                <div class="vip-input-group full-width">
+                                <!-- Row 2 (Side by Side as per focus scribble) -->
+                                <div class="vip-input-group">
                                     <label>Email</label>
                                     <input type="email" class="vip-input" placeholder="Enter your email">
                                 </div>
-                                <!-- Row 3 (Full Width) -->
-                                <div class="vip-input-group full-width">
+                                <div class="vip-input-group">
                                     <label>Message</label>
-                                    <textarea class="vip-input font-sans" rows="6" placeholder="Tell me about your project..."></textarea>
+                                    <textarea class="vip-input font-sans text-xs" rows="3" placeholder="Tell me about your project..."></textarea>
                                 </div>
                                 
                                 <button type="submit" class="vip-submit-btn">
