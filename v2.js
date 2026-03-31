@@ -175,8 +175,15 @@ const init = () => {
 
             const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
             renderer.setSize(width, height);
-            renderer.setPixelRatio(window.devicePixelRatio);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
             container.appendChild(renderer.domElement);
+            
+            // Critical: Ensure canvas is visible
+            renderer.domElement.style.width = '100%';
+            renderer.domElement.style.height = '100%';
+            renderer.domElement.style.display = 'block';
+            renderer.domElement.style.position = 'relative';
+            renderer.domElement.style.zIndex = '5';
 
             // Chroma Key Shader (Improved robust syntax)
             const vertexShader = `
@@ -190,15 +197,9 @@ const init = () => {
             const fragmentShader = `
                 uniform sampler2D map;
                 varying vec2 vUv;
-                void main() {
+                    // Simplified Shader for maximum reliability - chroma logic removed
                     vec4 color = texture2D(map, vUv);
-                    // Balanced Chroma Key logic - Less aggressive to prevent total invisibility
-                    float blueStrength = color.b - max(color.r, color.g);
-                    float alpha = 1.0;
-                    if(blueStrength > 0.35) { // Increased threshold from 0.05
-                        alpha = clamp(1.0 - (blueStrength * 4.0), 0.0, 1.0);
-                    }
-                    gl_FragColor = vec4(color.rgb, alpha * color.a);
+                    gl_FragColor = vec4(color.rgb, color.a); 
                 }
             `;
 
