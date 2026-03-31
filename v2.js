@@ -326,7 +326,12 @@ const init = () => {
                 el.className = 'skill-ball';
                 el.style.setProperty('--skill-color', skill.color);
                 el.style.setProperty('--glow-color', skill.glow);
-                el.innerHTML = `<span class="skill-progress-tag">${skill.progress}</span><i class="${skill.icon}"></i><div class="skill-tooltip">${skill.name}</div>`;
+                el.innerHTML = `
+                    <div class="skill-inner-glow"></div>
+                    <i class="${skill.icon}"></i>
+                    <div class="skill-badge">${skill.progress}</div>
+                    <div class="skill-tooltip">${skill.name}</div>
+                `;
                 container.appendChild(el);
                 ball.element = el;
                 balls.push(ball);
