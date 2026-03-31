@@ -491,6 +491,7 @@
             width: 3.5rem;
             height: 3.5rem;
             background: #111821;
+            border: 1px solid rgba(255, 255, 255, 0.03);
             border-radius: 12px;
             display: flex;
             align-items: center;
@@ -499,15 +500,19 @@
             color: #475569;
             box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
         }
 
         .social-squircle:hover {
+            transform: scale(1.15) translateY(-5px);
             color: white;
-            background: #1a222e;
-            transform: scale(1.15) translateY(-8px) rotate(5deg);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
-            filter: drop-shadow(0 0 10px rgba(99, 102, 241, 0.3));
         }
+
+        /* Brand Colors on Hover */
+        .social-squircle.facebook:hover { background: #1877f2; box-shadow: 0 10px 20px rgba(24, 119, 242, 0.3); border-color: transparent; }
+        .social-squircle.instagram:hover { background: #e4405f; box-shadow: 0 10px 20px rgba(228, 64, 95, 0.3); border-color: transparent; }
+        .social-squircle.linkedin:hover { background: #0077b5; box-shadow: 0 10px 20px rgba(0, 119, 181, 0.3); border-color: transparent; }
+        .social-squircle.github:hover { background: #333; box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4); border-color: rgba(255, 255, 255, 0.1); }
 
         .sidebar-tag {
             font-size: 11px;
@@ -1051,10 +1056,10 @@
 
                                 <div class="pt-8">
                                     <div class="social-squircle-grid">
-                                        <a href="https://web.facebook.com/ahmed.raza.727771" target="_blank" class="social-squircle"><i class="fab fa-facebook-f text-sm"></i></a>
-                                        <a href="https://www.instagram.com/raza.__.ahmed?igsh=MWoxbzN3NmJnZnhwbw==" target="_blank" class="social-squircle"><i class="fab fa-instagram text-sm"></i></a>
-                                        <a href="https://linkedin.com/in/razaahmed1" target="_blank" class="social-squircle"><i class="fab fa-linkedin-in text-sm"></i></a>
-                                        <a href="https://github.com/razaahmed1" target="_blank" class="social-squircle"><i class="fab fa-github text-sm"></i></a>
+                                        <a href="https://web.facebook.com/ahmed.raza.727771" target="_blank" class="social-squircle facebook"><i class="fab fa-facebook-f text-sm"></i></a>
+                                        <a href="https://www.instagram.com/raza.__.ahmed?igsh=MWoxbzN3NmJnZnhwbw==" target="_blank" class="social-squircle instagram"><i class="fab fa-instagram text-sm"></i></a>
+                                        <a href="https://linkedin.com/in/razaahmed1" target="_blank" class="social-squircle linkedin"><i class="fab fa-linkedin-in text-sm"></i></a>
+                                        <a href="https://github.com/razaahmed1" target="_blank" class="social-squircle github"><i class="fab fa-github text-sm"></i></a>
                                     </div>
                                 </div>
                             </div>
