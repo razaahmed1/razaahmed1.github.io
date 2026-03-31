@@ -134,13 +134,13 @@ const init = () => {
         });
     }
 
-    function initPhysicsSkills() {
-        const container = document.getElementById('skills-container');
-        if (!container || typeof Matter === 'undefined') return;
-
-        const observer = new IntersectionObserver((entries) => {
-            if (entries[0].isIntersecting && container.offsetWidth > 0) {
 };
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+} else {
+    init();
+}
 
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
