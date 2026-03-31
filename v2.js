@@ -30,6 +30,17 @@ const init = () => {
 
     const preloader = document.getElementById('v2-preloader');
     if (preloader) {
+        if (typeof gsap !== 'undefined') {
+            gsap.set('.v2-preloader-logo', { y: 20, opacity: 0 });
+            gsap.set('.v2-preloader-student-tag', { opacity: 0, y: 10 });
+            
+            const mainTl = gsap.timeline();
+            mainTl.to('.v2-preloader-logo', { y: 0, opacity: 1, duration: 1, ease: 'power3.out', delay: 0.2 })
+                  .to('.v2-preloader-student-tag', { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out' }, "-=0.5");
+                  
+            gsap.to('.v2-preloader-glow', { opacity: 1, duration: 2, scale: 1.2, repeat: -1, yoyo: true });
+        }
+
         const progress = document.querySelector('.loader-progress');
         const progressText = document.querySelector('.loader-percent');
         const preloaderStatus = document.querySelector('.v2-preloader-status');
