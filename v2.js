@@ -192,11 +192,11 @@ const init = () => {
                 varying vec2 vUv;
                 void main() {
                     vec4 color = texture2D(map, vUv);
-                    // Blue exclusion logic
+                    // Balanced Chroma Key logic - Less aggressive to prevent total invisibility
                     float blueStrength = color.b - max(color.r, color.g);
                     float alpha = 1.0;
-                    if(blueStrength > 0.05) {
-                        alpha = clamp(1.0 - (blueStrength * 8.0), 0.0, 1.0);
+                    if(blueStrength > 0.35) { // Increased threshold from 0.05
+                        alpha = clamp(1.0 - (blueStrength * 4.0), 0.0, 1.0);
                     }
                     gl_FragColor = vec4(color.rgb, alpha * color.a);
                 }
@@ -214,9 +214,10 @@ const init = () => {
                         side: THREE.DoubleSide
                     });
 
-                    // Use Sphere or Plane? Let's stick to Plane with high detail
-                    const geometry = new THREE.PlaneGeometry(2, 2);
+                    // Increased geometry size and depth
+                    const geometry = new THREE.PlaneGeometry(2.2, 2.2);
                     const mesh = new THREE.Mesh(geometry, material);
+                    mesh.position.y = -0.1; // Centering adjustment
                     scene.add(mesh);
 
                     let targetRotationX = 0;
