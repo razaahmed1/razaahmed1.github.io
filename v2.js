@@ -210,7 +210,7 @@ const init = () => {
                         vertexShader,
                         fragmentShader,
                         transparent: true,
-                        side: THREE.BackSide
+                        side: THREE.DoubleSide
                     });
 
                     // Use Sphere or Plane? Let's stick to Plane with high detail
