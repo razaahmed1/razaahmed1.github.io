@@ -269,6 +269,11 @@ const init = () => {
             });
         });
     }
+    } catch(err) {
+        console.error("Global Init Error:", err);
+        const p = document.querySelector('.preloader');
+        if(p) p.style.display = 'none';
+    }
 };
 
 if (document.readyState === 'loading') {
